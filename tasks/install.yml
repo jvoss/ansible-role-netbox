@@ -1,0 +1,28 @@
+---
+- name: install | create the Netbox system user
+  ansible.builtin.user:
+    name: "{{ netbox_user }}"
+    home: "{{ netbox_home }}"
+    create_home: no
+    comment: Netbox
+    system: yes
+    state: present
+  become: yes
+
+- name: install | create Netbox directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ netbox_user }}"
+    mode: '0755'
+  loop:
+    - "{{ netbox_home }}"
+    - "{{ netbox_home }}/releases"
+
+- name: install | download Netbox via Git
+  include_tasks: download-git.yml
+  when: netbox_install_method == 'git'
+
+- name: install | download Netbox release
+  include_tasks: download-release.yml
+  when: netbox_install_method == 'release'

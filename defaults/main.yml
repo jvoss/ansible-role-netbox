@@ -1,0 +1,303 @@
+#### Netbox role configuration ####
+
+# The directory for netbox
+netbox_home: /opt/netbox
+netbox_current_path: "{{ netbox_home }}/current"
+
+# System username for Netbox processes
+netbox_user: netbox
+netbox_group: netbox
+
+# Netbox source and installation methods
+# changing the method to 'git' triggers installation via Git clone
+# from the latest commit in the specified branch. Optionally a commit sha
+# can be configured to set a specific commit to install.
+netbox_install_method: release
+netbox_git_branch: master
+# netbox_git_sha: # specify the specific commit sha to download
+
+#### gunicorn options ####
+
+# The IP address (typically localhost) and port that the Netbox WSGI process
+# should listen on
+netbox_gunicorn_bind: '127.0.0.1:8001'
+
+# Number of gunicorn workers to spawn. This should typically be 2n+1, where
+# n is the number of CPU cores present.
+netbox_gunicorn_workers: 5
+
+# Number of threads per worker process
+netbox_gunicorn_threads: 3
+
+# Timeout (in seconds) for a request to complete
+netbox_gunicorn_timeout: 120
+
+# The maximum number of requests a worker can handle before being respawned
+netbox_gunicorn_max_requests: 5000
+netbox_gunicorn_requests_jitter: 500
+
+### Netbox Required settings ###
+
+# This is a list of valid fully-qualified domain names (FQDNs) for the NetBox
+# server. NetBox will not permit write access to the server via any other
+# hostnames. The first FQDN in the list will be treated as the preferred name.
+netbox_allowed_hosts:
+  - '*'
+
+# PostgreSQL database configuration. See the Django documentation for a complete
+# list of available parameters:
+# https://docs.djangoproject.com/en/stable/ref/settings/#databases
+netbox_db_name: netbox          # Database name
+netbox_db_host: localhost       # Database server
+netbox_db_port: ''              # Database port (leave blank for default)
+netbox_db_username: netbox      # PostgreSQL username
+netbox_db_password: netbox      # PostgreSQL password
+netbox_db_conn_age: 300         # Max database connection age
+netbox_db_locale: en_US.UTF-8   # Database locale
+
+# Redis database settings. Redis is used for caching and for queuing background
+# tasks such as webhook events. A separate configuration exists for each. Full
+# connection details are required in both sections, and it is strongly recommended
+# to use two separate database IDs.
+netbox_redis_ssl: False
+netbox_redis_user: ''
+netbox_redis_password: ''
+netbox_redis_host: localhost
+netbox_redis_port: 6379
+netbox_redis_tasks_db: 0
+netbox_redis_cache_db: 1
+netbox_redis_tls_insecure: False
+
+# This key is used for secure generation of random numbers and strings. It must never be exposed outside of this file.
+# For optimal security, SECRET_KEY should be at least 50 characters in length and contain a mix of letters, numbers, and
+# symbols. NetBox will not run without this defined. For more information, see
+# https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECRET_KEY
+#
+# NOTE: leave undefined for this ansible role to randomly generate a suitable
+# key during configuration
+# netbox_secret_key: "e#69mpl2d94#gmv+)&!ws(_3+0yp9a-n*62_7wxjxk_7#253tac"
+
+### Netbox Optional settings ###
+
+# Specify one or more name and email address tuples representing NetBox
+# administrators. These people will be notified of application errors (assuming
+# correct email settings are provided).
+netbox_admins: []
+# netbox_admins:
+#   - ['John Doe', 'jdoe@example.com']
+
+# URL schemes that are allowed within links in Netbox
+netbox_allowed_url_schemes:
+  - file
+  - ftp
+  - ftps
+  - http
+  - https
+  - irc
+  - mailto
+  - sftp
+  - ssh
+  - tel
+  - telnet
+  - tftp
+  - vnc
+  - xmpp
+
+# Optionally display a persistent banner at the top and/or bottom of every page.
+# HTML is allowed. To display the same content in both banners, define
+# BANNER_TOP and set BANNER_BOTTOM = BANNER_TOP.
+netbox_banner:
+  top:
+  bottom:
+
+# Text to include on the login page above the login form. HTML is allowed.
+netbox_banner_login:
+
+# Base URL path if accessing NetBox within a directory. For example, if
+# installed at https://example.com/netbox/, set:
+# netbox_base_path: 'netbox/'
+netbox_base_path:
+
+# Maximum number of days to retain logged changes. Set to 0 to retain changes
+# indefinitely. (Default: 90)
+netbox_changelog_retention: 90
+
+# API Cross-Origin Resource Sharing (CORS) settings. If CORS_ORIGIN_ALLOW_ALL is set to
+# True, all origins will be allowed. Otherwise, define a list of allowed origins using
+# either CORS_ORIGIN_WHITELIST or CORS_ORIGIN_REGEX_WHITELIST. For more information, see
+# https://github.com/ottoyiu/django-cors-headers
+netbox_origin_allow_all: False
+
+# A list of origins that are authorized to make cross-site HTTP requests.
+# Defaults to [].
+netbox_cors_origin_whitelist: [
+  # 'https://hostname.example.com'
+]
+
+netbox_cors_origin_regex_whitelist: [
+  # "r'^https?://)?(\w+\.)?example\.com$'"
+]
+
+# Set to True to enable server debugging. WARNING: Debugging introduces a substantial
+# performance penalty and may reveal sensitive information about your installation.
+# Only enable debugging while performing testing. Never enable debugging on a production
+# system.
+netbox_debug: False
+
+# Email settings
+netbox_email:
+  server: localhost
+  port: 25
+  username:
+  password:
+  use_ssl: False
+  use_tls: False
+  timeout: 10  # seconds
+  from_email:
+
+# Enforcement of unique IP space can be toggled on a per-VRF basis. To enforce unique IP
+# space within the global table (all prefixes and IP addresses not assigned to a VRF),
+# set ENFORCE_GLOBAL_UNIQUE to True.
+netbox_enforce_global_unique: False
+
+# Exempt certain models from the enforcement of view permissions. Models listed here
+# will be viewable by all users and by anonymous users. List models in the form
+# `<app>.<model>`. Add '*' to this list to exempt all models.
+netbox_exempt_view_permissions: []
+
+# Enable the GraphQL API
+netbox_graphql_enabled: True
+
+# HTTP proxies Nautobot should use when sending outbound HTTP requests
+# (e.g. for webhooks).
+netbox_http_proxies: {
+  #http: "http://10.10.1.10:3128",
+  #https: "http://10.10.1.10:3128"
+}
+
+# IP addresses recognized as internal to the system. The debugging toolbar will be
+# available only to clients accessing Netbox from an internal IP.
+netbox_internal_ips:
+  - "127.0.0.1"
+  - "::1"
+
+# Automatically reset the lifetime of a valid session upon each authenticated request.
+# Enables users to remain authenticated to NetBox indefinitely.
+netbox_logging_persistence: False
+
+# Setting this to True will permit only authenticated users to access any part of NetBox.
+# By default, anonymous users are permitted to access most data in NetBox but not make
+# any changes.
+netbox_login_required: False
+
+# The length of time (in seconds) for which a user will remain logged into the web UI
+# before being prompted to re-authenticate. (Default: 1209600 [14 days])
+netbox_login_timeout: None
+
+# Setting this to True will display a "maintenance mode" banner at the top of every page.
+netbox_maintenance_mode: False
+
+# The URL to use when mapping physical addresses or GPS coordinates
+netbox_maps_url: https://maps.google.com/?q=
+
+# An API consumer can request an arbitrary number of objects =by appending the "limit"
+# parameter to the URL (e.g. "?limit=1000"). This setting defines the maximum limit.
+# Setting it to 0 or None will allow an API consumer to request all objects by
+# specifying "?limit=0".
+netbox_max_page_size: 1000
+
+# The file path where uploaded media such as image attachments are stored. A trailing
+# slash is not needed. Note that the default value of this setting is derived from the
+# installed location.
+# netbox_media_root: '/opt/netbox/netbox/media'
+
+# By default uploaded media is stored on the local filesystem. Using
+# Django-storages is also supported. Provide the class path of the storage
+# driver in STORAGE_BACKEND and any configuration options in STORAGE_CONFIG.
+# For example:
+#
+# netbox_storage:
+#   backend: storages.backends.s3boto3.S3Boto3Storage
+#   config:
+#     AWS_ACCESS_KEY_ID: Key ID
+#     AWS_SECRET_ACCESS_KEY: Secret
+#     AWS_STORAGE_BUCKET_NAME: netbox
+#     AWS_S3_REGION_NAME: eu-west-1
+
+# Expose Prometheus monitoring metrics at the HTTP endpoint '/metrics'
+netbox_metrics_enabled: False
+
+# Credentials that Netbox will uses to authenticate to devices when connecting
+# via NAPALM.
+netbox_napalm:
+  username: ''
+  password: ''
+  timeout: 30 # NAPALM timeout (in seconds). (Default: 30)
+
+  # NAPALM optional arguments
+  # (see https://napalm.readthedocs.io/en/latest/support/#optional-arguments).
+  # Arguments must be provided as a dictionary.
+  args: {}
+
+# Determine how many objects to display per page within a list. (Default: 50)
+netbox_paginate_count: 50
+
+# Netbox plugins. See README.md for plugin configuration details.
+netbox_plugins: []
+
+# When determining the primary IP address for a device, IPv6 is preferred over
+# IPv4 by default. Set this to True to prefer IPv4 instead.
+netbox_prefer_ipv4: False
+
+# Rack elevation size defaults, in pixels. For best results, the ratio of width
+# to height should be roughly 10:1.
+netbox_rack_elevation_default_unit_height: 22
+netbox_rack_elevation_default_unit_width: 220
+
+# Remote authentication support
+netbox_remote_auth:
+  enabled: False
+  backend: 'netbox.authentication.RemoteUserBackend'
+  header: 'HTTP_REMOTE_USER'
+  auto_create_user: True
+  default_groups: []
+  default_permissions: {}
+
+# This repository is used to check whether there is a new release of NetBox available.
+# Set to None to disable the version check or use the URL below to check for release
+# in the official NetBox repository.
+# netbox_release_check_url: 'https://api.github.com/repos/netbox-community/netbox/releases'
+netbox_release_check_url: None
+
+# The file path where custom reports will be stored. A trailing slash is not needed.
+# Note that the default value of this setting is derived from the installed location.
+# netbox_reports_root: '/opt/netbox/netbox/reports'
+
+# Maximum execution time for background tasks, in seconds.
+netbox_rq_default_timeout: 300
+
+# The file path where custom scripts will be stored. A trailing slash is not needed.
+# Note that the default value of this setting is derived from the installed location.
+# netbox_scripts_root: = '/opt/netbox/netbox/scripts'
+
+# The name to use for the session cookie.
+netbox_session_cookie_name: 'sessionid'
+
+# By default, NetBox will store session data in the database. Alternatively, a file
+# path can be specified here to use local file storage instead. (This can be useful for
+# enabling authentication on a standby instance with read-only database access.) Note
+# that the user as which NetBox runs must have read and write permissions to this path.
+netbox_session_file_path: None
+
+# Time zone (default: UTC)
+netbox_time_zone: UTC
+
+# Date/time formatting. See the following link for supported formats:
+# https://docs.djangoproject.com/en/stable/ref/templates/builtins/#date
+netbox_time_format:
+  date: N j, Y
+  short_date: Y-m-d
+  time: g:i a
+  short_time: H:i:s
+  datetime: N j, Y g:i a
+  short_datetime: Y-m-d H:i

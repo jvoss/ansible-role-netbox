@@ -1,0 +1,221 @@
+# {{ ansible_managed }}
+
+#########################
+#                       #
+#   Required settings   #
+#                       #
+#########################
+
+ALLOWED_HOSTS = {{ netbox_allowed_hosts|to_json }}
+
+DATABASE = {
+    'NAME': '{{ netbox_db_name }}',        
+    'USER': '{{ netbox_db_username }}',     
+    'PASSWORD': '{{ netbox_db_password }}', 
+    'HOST': '{{ netbox_db_host }}',         
+    'PORT': '{{ netbox_db_port }}',         
+    'CONN_MAX_AGE': {{ netbox_db_conn_age }},
+}
+
+REDIS = {
+    'tasks': {
+        'HOST': '{{ netbox_redis_host }}',
+        'PORT': {{ netbox_redis_port }},
+        # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
+        # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
+        # 'SENTINEL_SERVICE': 'netbox',
+        'PASSWORD': '{{ netbox_redis_password }}',
+        'DATABASE': {{ netbox_redis_tasks_db }},
+        'SSL': {{ netbox_redis_ssl }},
+        # Set this to True to skip TLS certificate verification
+        # This can expose the connection to attacks, be careful
+        'INSECURE_SKIP_TLS_VERIFY': {{ netbox_redis_tls_insecure }},
+    },
+    'caching': {
+        'HOST': '{{ netbox_redis_host }}',
+        'PORT': {{ netbox_redis_port }},
+        # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
+        # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
+        # 'SENTINEL_SERVICE': 'netbox',
+        'PASSWORD': '{{ netbox_redis_password }}',
+        'DATABASE': {{ netbox_redis_cache_db }},
+        'SSL': {{ netbox_redis_ssl }},
+        # Set this to True to skip TLS certificate verification
+        # This can expose the connection to attacks, be careful
+        'INSECURE_SKIP_TLS_VERIFY': {{ netbox_redis_tls_insecure }},
+    }
+}
+
+SECRET_KEY = '{{ netbox_secret_key }}'
+
+
+#########################
+#                       #
+#   Optional settings   #
+#                       #
+#########################
+
+{% if netbox_admins|length > 0 %}
+ADMINS = {{ netbox_admins|to_json }}
+{% else %}
+ADMINS = []
+{% endif %}
+
+ALLOWED_URL_SCHEMES = (
+    '{{ netbox_allowed_url_schemes | join("', '") }}',
+)
+
+BANNER_TOP = '{{ netbox_banner.top }}'
+BANNER_BOTTOM = '{{ netbox_banner.bottom }}'
+BANNER_LOGIN = '{{ netbox_banner_login }}'
+
+BASE_PATH = '{{ netbox_base_path }}'
+
+CHANGELOG_RETENTION = {{ netbox_changelog_retention }}
+
+CORS_ORIGIN_ALLOW_ALL = {{ netbox_origin_allow_all }}
+
+{% if netbox_cors_origin_whitelist|length > 0 %}
+CORS_ORIGIN_WHITELIST = {{ netbox_cors_origin_whitelist|to_json }}
+{% else %}
+CORS_ORIGIN_WHITELIST = []
+{% endif %}
+
+{% if netbox_cors_origin_regex_whitelist|length > 0 %}
+CORS_ORIGIN_REGEX_WHITELIST = {{ netbox_cors_origin_regex_whitelist|to_json }}
+{% else %}
+CORS_ORIGIN_REGEX_WHITELIST = []
+{% endif %}
+
+# Specify any custom validators here, as a mapping of model to a list of validators classes. Validators should be
+# instances of or inherit from CustomValidator.
+# from extras.validators import CustomValidator
+CUSTOM_VALIDATORS = {
+    # 'dcim.site': [
+    #     CustomValidator({
+    #         'name': {
+    #             'min_length': 10,
+    #             'regex': r'\d{3}$',
+    #         }
+    #     })
+    # ],
+}
+
+DEBUG = {{ netbox_debug }}
+
+EMAIL = {
+    'SERVER': '{{ netbox_email.server }}',
+    'PORT': {{ netbox_email.port }},
+    'USERNAME': '{{ netbox_email.username }}',
+    'PASSWORD': '{{ netbox_email.password }}',
+    'USE_SSL': {{ netbox_email.use_ssl }},
+    'USE_TLS': {{ netbox_email.use_tls }},
+    'TIMEOUT': {{ netbox_email.timeout }},  # seconds
+    'FROM_EMAIL': '{{ netbox_email.from_email }}',
+}
+
+ENFORCE_GLOBAL_UNIQUE = {{ netbox_enforce_global_unique }}
+
+{% if netbox_exempt_view_permissions|length > 0 %}
+EXEMPT_VIEW_PERMISSIONS = {{ netbox_exempt_view_permissions|to_json }}
+{% else %}
+EXEMPT_VIEW_PERMISSIONS = []
+{% endif %}
+
+GRAPHQL_ENABLED = {{ netbox_graphql_enabled }}
+
+{% if netbox_http_proxies|length > 0 %}
+HTTP_PROXIES = {{ netbox_http_proxies|to_json }}
+{% endif %}
+
+INTERNAL_IPS = ('{{netbox_internal_ips|join("', '")}}')
+
+# Enable custom logging. Please see the Django documentation for detailed guidance on configuring custom logs:
+#   https://docs.djangoproject.com/en/stable/topics/logging/
+LOGGING = {}
+
+LOGIN_PERSISTENCE = {{ netbox_logging_persistence }}
+
+LOGIN_REQUIRED = {{ netbox_login_required }}
+
+LOGIN_TIMEOUT = {{ netbox_login_timeout }}
+
+MAINTENANCE_MODE = {{ netbox_maintenance_mode }}
+
+MAPS_URL = '{{ netbox_maps_url }}'
+
+MAX_PAGE_SIZE = {{ netbox_max_page_size }}
+
+{% if netbox_media_root is defined %}
+MEDIA_ROOT = '{{ netbox_media_root }}'
+{% endif %}
+
+{% if netbox_storage is defined %}
+STORAGE_BACKEND = '{{ netbox_storage.backend }}'
+STORAGE_CONFIG = {{ netbox_storage.config|to_json }}
+{% endif %}
+
+METRICS_ENABLED = {{ netbox_metrics_enabled }}
+
+NAPALM_USERNAME = '{{ netbox_napalm.username }}'
+NAPALM_PASSWORD = '{{ netbox_napalm.password }}'
+NAPALM_TIMEOUT  = {{ netbox_napalm.timeout }}
+NAPALM_ARGS     = {{ netbox_napalm.args|to_json }}
+
+PAGINATE_COUNT = {{ netbox_paginate_count }}
+
+PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
+
+{% set plugins_config = dict() %}
+{% for plugin in netbox_plugins %}
+{% set x = plugins_config.__setitem__(plugin.name, plugin.config) %}
+{% endfor %}
+PLUGINS_CONFIG = {{ plugins_config | to_json }}
+
+PREFER_IPV4 = {{ netbox_prefer_ipv4 }}
+
+RACK_ELEVATION_DEFAULT_UNIT_HEIGHT = {{ netbox_rack_elevation_default_unit_height }}
+RACK_ELEVATION_DEFAULT_UNIT_WIDTH = {{ netbox_rack_elevation_default_unit_width }}
+
+# Remote authentication support
+REMOTE_AUTH_ENABLED = {{ netbox_remote_auth.enabled }}
+REMOTE_AUTH_BACKEND = '{{ netbox_remote_auth.backend }}'
+{% if netbox_remote_auth.header is defined %}
+REMOTE_AUTH_HEADER = '{{ netbox_remote_auth.header }}'
+{% endif %}
+REMOTE_AUTH_AUTO_CREATE_USER = {{ netbox_remote_auth.auto_create_user }}
+REMOTE_AUTH_DEFAULT_GROUPS = {{ netbox_remote_auth.default_groups | to_json }}
+REMOTE_AUTH_DEFAULT_PERMISSIONS = {{ netbox_remote_auth.default_permissions | to_json }}
+
+{% if netbox_release_check_url == 'None' %}
+RELEASE_CHECK_URL = None
+{% else %}
+RELEASE_CHECK_URL = "{{ netbox_release_check_url }}"
+{% endif %}
+
+{% if netbox_reports_root is defined %}
+REPORTS_ROOT = {{ netbox_reports_root }}
+{% endif %}
+
+RQ_DEFAULT_TIMEOUT = {{ netbox_rq_default_timeout }}
+
+{% if netbox_scripts_root is defined %}
+SCRIPTS_ROOT = {{ netbox_scripts_root }}
+{% endif %}
+
+SESSION_COOKIE_NAME = '{{ netbox_session_cookie_name }}'
+
+{% if netbox_session_file_path == 'None' %}
+SESSION_FILE_PATH = None
+{% else %}
+SESSION_FILE_PATH = "{{ netbox_session_file_path }}"
+{% endif %}
+
+TIME_ZONE = "{{ netbox_time_zone }}"
+
+DATE_FORMAT = '{{ netbox_time_format.date }}'
+SHORT_DATE_FORMAT = '{{ netbox_time_format.short_date }}'
+TIME_FORMAT = '{{ netbox_time_format.time }}'
+SHORT_TIME_FORMAT = '{{ netbox_time_format.short_time }}'
+DATETIME_FORMAT = '{{ netbox_time_format.datetime }}'
+SHORT_DATETIME_FORMAT = '{{ netbox_time_format.short_datetime }}'

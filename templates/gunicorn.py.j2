@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+bind = '{{ netbox_gunicorn_bind }}'
+
+workers = {{ netbox_gunicorn_workers }}
+threads = {{ netbox_gunicorn_threads }}
+timeout = {{ netbox_gunicorn_timeout }}
+
+max_requests = {{ netbox_gunicorn_max_requests }}
+max_requests_jitter = {{ netbox_gunicorn_requests_jitter }}

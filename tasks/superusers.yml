@@ -1,0 +1,24 @@
+---
+- name: superusers | create Netbox superusers
+  ansible.builtin.shell: |
+    source {{ netbox_current_path }}/venv/bin/activate
+    python3 manage.py createsuperuser --noinput
+  environment:
+    NETBOX_ROOT: "{{ netbox_current_path }}"
+    DJANGO_SUPERUSER_USERNAME: "{{ item.username }}"
+    DJANGO_SUPERUSER_PASSWORD: "{{ item.password }}"
+    DJANGO_SUPERUSER_EMAIL: "{{ item.email }}"
+  args:
+    chdir: "{{ netbox_current_path }}/netbox"
+    executable: /bin/bash
+  become: yes
+  become_method: sudo
+  become_user: "{{ netbox_user }}"
+  register: result
+  loop: "{{ netbox_superusers }}"
+  loop_control:
+    label: "{{ item.username }}"
+  changed_when: '"Superuser created successfully." in result.stdout'
+  failed_when: >
+    (result.stderr != '') and
+    ("CommandError: Error: That username is already taken." not in result.stderr)

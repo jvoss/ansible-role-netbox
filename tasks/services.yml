@@ -1,0 +1,29 @@
+---
+- name: services | create netbox systemd service
+  ansible.builtin.template:
+    src: netbox.service.j2
+    dest: /etc/systemd/system/netbox.service
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: services | create netbox-rq systemd service
+  ansible.builtin.template:
+    src: netbox-rq.service.j2
+    dest: /etc/systemd/system/netbox-rq.service
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: services | start and enable netbox services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+  loop:
+    - netbox
+    - netbox-rq

@@ -1,0 +1,33 @@
+---
+- name: download-git | Retreive latest commit information
+  ansible.builtin.uri:
+    url: "https://api.github.com/repos/netbox-community/netbox/commits/{{ netbox_git_branch }}"
+    return_content: true
+  register: latest_commit
+  when: netbox_git_sha is undefined
+
+- name: download-git | Set latest Netbox commit SHA fact
+  ansible.builtin.set_fact:
+    netbox_git_sha: "{{ latest_commit.json.sha }}"
+  when: netbox_git_sha is undefined
+
+- name: download-git | Set Netbox version path fact
+  ansible.builtin.set_fact:
+    netbox_version_path: "{{ netbox_home }}/releases/netbox-{{ netbox_git_sha }}"
+
+- name: download-git | Clone Netbox git repository
+  ansible.builtin.git:
+    repo: "https://github.com/netbox-community/netbox.git"
+    dest: "{{ netbox_version_path }}"
+    version: "{{ netbox_git_sha }}"
+  become: true
+  become_user: "{{ netbox_user }}"
+
+- name: download-git | Symlink current Netbox directory
+  ansible.builtin.file:
+    src: "{{ netbox_version_path }}"
+    dest: "{{ netbox_current_path }}"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    state: link
+  register: netbox_current_symlink

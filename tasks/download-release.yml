@@ -1,0 +1,43 @@
+---
+- name: download-release | Retreive latest release information
+  ansible.builtin.uri:
+    url: "https://api.github.com/repos/netbox-community/netbox/releases/latest"
+    return_content: true
+  register: latest_release
+
+- name: download-release | Set latest Netbox version fact
+  ansible.builtin.set_fact:
+    netbox_version_tag: "{{ latest_release.json.tag_name }}"
+  when: netbox_version_tag is undefined
+
+- name: download-release | Set Netbox version path fact
+  ansible.builtin.set_fact:
+    netbox_version_path: "{{ netbox_home }}/releases/netbox-{{ netbox_version_tag }}"
+
+- name: download-release | Create Netbox release directory
+  ansible.builtin.file:
+    dest: "{{ netbox_version_path }}"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    mode: '0755'
+    state: directory
+
+- name: download-release | Download and extract Netbox version
+  ansible.builtin.unarchive:
+    src: "{{ latest_release.json.tarball_url }}"
+    dest: "{{ netbox_version_path }}"
+    extra_opts:
+      - "--strip-components=1"
+    creates: "{{ netbox_version_path }}/netbox"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    remote_src: true
+
+- name: download-release | Symlink current Netbox directory
+  ansible.builtin.file:
+    src: "{{ netbox_version_path }}"
+    dest: "{{ netbox_current_path }}"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    state: link
+  register: netbox_current_symlink

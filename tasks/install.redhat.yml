@@ -1,0 +1,31 @@
+---
+- name: install.redhat | install required system packages
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - gcc
+    - python39
+    - python39-devel
+    - python3-pip
+    - python3-dnf
+    - libxml2-devel
+    - libxslt-devel
+    - libffi-devel
+    - libpq-devel
+    - openssl-devel
+    - redhat-rpm-config
+
+- name: install.redhat | install Git
+  ansible.builtin.yum:
+    name: git
+    state: present
+  when: netbox_install_method == 'git'
+
+- name: install.redhat | install system packages for LDAP authentication
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - openldap-devel
+  when: netbox_auth_ldap is defined

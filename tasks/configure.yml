@@ -1,0 +1,70 @@
+---
+- name: configure | generate django secret key
+  ansible.builtin.command: "python3 {{ netbox_current_path }}/netbox/generate_secret_key.py"
+  register: netbox_secret_key_generated
+  when: netbox_secret_key is undefined
+
+- name: configure | set django secret key fact
+  ansible.builtin.set_fact:
+    netbox_secret_key: "{{ netbox_secret_key_generated.stdout }}"
+  when: netbox_secret_key is undefined
+
+- name: configure | add django-auth-ldap to local_requirements.txt
+  ansible.builtin.lineinfile:
+    path: "{{ netbox_current_path }}/local_requirements.txt"
+    line: "django-auth-ldap"
+    regexp: "^django-auth-ldap"
+    owner: "{{ netbox_user }}"
+    mode: '0644'
+    create: yes
+  register: netbox_auth_ldap_requirements
+  when: netbox_auth_ldap is defined
+
+- name: configure | write configuration.py
+  ansible.builtin.template:
+    src: configuration.py.j2
+    dest: "{{ netbox_current_path }}/netbox/netbox/configuration.py"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    mode: '0664'
+  become: yes
+  become_user: "{{ netbox_user }}"
+  notify: restart_netbox
+
+- name: configure | write ldap_config.py
+  ansible.builtin.template:
+    src: ldap_config.py.j2
+    dest: "{{ netbox_current_path }}/netbox/netbox/ldap_config.py"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    mode: '0664'
+  become: yes
+  become_user: "{{ netbox_user }}"
+  notify: restart_netbox
+  when: netbox_auth_ldap is defined
+
+- name: configure | write gunicorn.py
+  ansible.builtin.template:
+    src: gunicorn.py.j2
+    dest: "{{ netbox_current_path }}/gunicorn.py"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    mode: '0664'
+  become: yes
+  become_user: "{{ netbox_user }}"
+  notify: restart_netbox
+
+- name: configure | configure the housekeeping task
+  ansible.builtin.template:
+    src: housekeeping.sh.j2
+    dest: "{{ netbox_current_path }}/contrib/netbox-housekeeping.sh"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    mode: '0775'
+
+- name: configure | schedule the housekeeping task
+  ansible.builtin.cron:
+    name: "netbox housekeeping"
+    special_time: daily
+    user: "{{ netbox_user }}"
+    job: "{{ netbox_current_path }}/contrib/netbox-housekeeping.sh"

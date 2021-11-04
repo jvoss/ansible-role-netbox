@@ -1,0 +1,11 @@
+---
+- name: upgrade | run the upgrade script
+  ansible.builtin.command: "{{ netbox_current_path }}/upgrade.sh"
+  environment:
+    PYTHON: python3.9
+  become: yes
+  become_method: sudo
+  notify: restart_netbox
+  when: netbox_current_symlink.changed or netbox_auth_ldap_requirements.changed
+  tags:
+    - skip_ansible_lint # task vs handler to trigger at specific point in run

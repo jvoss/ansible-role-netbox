@@ -1,0 +1,38 @@
+---
+- name: install.debian | update apt repository cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: install.debian | install required system packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python3.9
+    - python3-pip
+    - python3.9-venv
+    - python3.9-dev
+    - build-essential
+    - libxml2-dev
+    - libxslt1-dev
+    - libffi-dev
+    - libpq-dev
+    - libssl-dev
+    - zlib1g-dev
+
+- name: install.debian | install Git
+  ansible.builtin.apt:
+    name: git
+    state: present
+  when: netbox_install_method == 'git'
+
+- name: install.debian | install system packages for LDAP authentication
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - libldap2-dev
+    - libsasl2-dev
+    - libssl-dev
+  when: netbox_auth_ldap is defined
