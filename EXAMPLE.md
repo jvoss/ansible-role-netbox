@@ -30,7 +30,7 @@ At the completion of this play netbox will be available at: `http://<host_ip>:80
       :8080 {
         route /static* {
           uri strip_prefix /static
-          root * {{ netbox_current_path }}/netbox/static
+          root * /opt/netbox/current/netbox/static
           file_server
         }
 
