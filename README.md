@@ -1,7 +1,9 @@
 # Ansible Role: Netbox
 
 [![CI](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml)
+[![Netbox](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml/badge.svg)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jvoss.netbox-blue.svg)](https://galaxy.ansible.com/jvoss/netbox)
+[![Version](https://img.shields.io/github/release/jvoss/ansible-role-netbox.svg)](https://github.com/jvoss/ansible-role-netbox/releases/)
 
 Installs and configures [Netbox](https://github.com/netbox-community/netbox) on
 RHEL/CentOS or Ubuntu servers.
