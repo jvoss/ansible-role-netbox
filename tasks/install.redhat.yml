@@ -5,10 +5,9 @@
     state: present
   loop:
     - gcc
-    - python39
-    - python39-devel
+    - python38
+    - python38-devel
     - python3-pip
-    - python3-dnf
     - libxml2-devel
     - libxslt-devel
     - libffi-devel
