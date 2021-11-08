@@ -61,6 +61,7 @@ jobs:
     strategy:
       matrix:
         distro:
+          - amazonlinux2-ansible
           - centos8
           - ubuntu2004
         python_version:
