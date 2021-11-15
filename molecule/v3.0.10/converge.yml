@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    netbox_version_tag: v3.0.10
+    netbox_db_username: netbox
+    netbox_db_password: netbox
+    netbox_napalm:
+      username: napalm
+      password: testing
+      timeout: 30
+      args: {}
+    netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+    netbox_superusers:
+      - username: admin
+        password: admin
+        email: changeme@example.com
+
+  roles:
+    - role: jvoss.netbox
