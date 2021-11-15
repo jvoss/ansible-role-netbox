@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-file: molecule/default/requirements.yml
 
 driver:
   name: docker
@@ -17,3 +19,7 @@ platforms:
 
 provisioner:
   name: ansible
+  playbooks:
+    prepare: ../default/prepare.yml
+    converge: converge.yml
+    verify: ../default/verify.yml
