@@ -19,6 +19,7 @@ of the application. Those tasks are intentionally left to allow the user to
 manage those services within their own roles and playbooks.
 
 Tested on netbox supported platforms:
+* Amazon Linux 2
 * CentOS 8.2+ or Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
 
