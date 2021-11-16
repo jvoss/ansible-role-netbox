@@ -110,7 +110,7 @@ jobs:
 
       - name: Install Amazon Linux 2 dependencies.
         run: |
-          sudo amazon-linux-extras install python${{ matrix.python_version }} 
+          sudo amazon-linux-extras install python${{ matrix.python_version }}
           sudo amazon-linux-extras install postgresql10
         if: matrix.distro == 'amazonlinux2'
 
