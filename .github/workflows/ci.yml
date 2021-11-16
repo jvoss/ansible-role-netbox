@@ -108,12 +108,6 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install -r requirements.txt
 
-      - name: Install Amazon Linux 2 dependencies.
-        run: |
-          sudo amazon-linux-extras install python${{ matrix.python_version }}
-          sudo amazon-linux-extras install postgresql10
-        if: matrix.distro == 'amazonlinux2'
-
       - name: Run Molecule tests.
         run: molecule test
         env:
