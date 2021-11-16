@@ -47,9 +47,9 @@
             owner: "{{ netbox_db_username }}"
             lc_collate: "{{ db_locale | default('en_US.UTF-8') }}"
             lc_ctype: "{{ db_locale | default('en_US.UTF-8') }}"
-      when: lookup('env', 'CI') != 'true'
+      when: lookup('env', 'CI') != 'true' # skip if via github actions
 
     - name: Install Redis
       include_role:
         name: geerlingguy.redis
-      when: lookup('env', 'CI') != 'true'
+      when: lookup('env', 'CI') != 'true' # skip if via github actions

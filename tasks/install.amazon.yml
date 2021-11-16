@@ -1,0 +1,33 @@
+---
+- name: install.amazon | checking for amazon extras yum repo file
+  ansible.builtin.stat:
+    path: /etc/yum.repos.d/amzn2-extras.repo
+  register: amazon_extras_repo
+
+- name: install.amazon | checking if required amazon extras are enabled
+  ansible.builtin.lineinfile:
+    path: /etc/yum.repos.d/amzn2-extras.repo
+    line: "{{ item }}"
+    regexp: "^\\[amzn2extra-{{ item }}\\]"
+    state: present
+  check_mode: yes
+  when: amazon_extras_repo.stat.exists
+  register: amzn2extras
+  changed_when: amzn2extras is failed
+  with_items:
+    - python3.8
+    - postgresql12
+
+- name: install.amazon | enable required extras
+  ansible.builtin.command: "amazon-linux-extras enable {{ item }} "
+  become: yes
+  with_items:
+    - python3.8
+    - postgresql12
+  when: not amazon_extras_repo.stat.exists or amzn2extras is failed
+
+- name: install.amazon | install tar
+  ansible.builtin.yum:
+    name: tar
+    state: present
+  when: netbox_install_method != 'git'

@@ -11,12 +11,13 @@ defaults:
     working-directory: 'jvoss.netbox'
 
 jobs:
-  molecule:
+  netbox:
     name: Netbox
     runs-on: ubuntu-latest
     strategy:
       matrix:
         distro:
+          - amazonlinux2
           - centos8
           - ubuntu2004
         netbox:
