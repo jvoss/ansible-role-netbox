@@ -61,6 +61,7 @@ jobs:
     strategy:
       matrix:
         distro:
+          - amazonlinux2
           - centos8
           - ubuntu2004
         python_version:
@@ -106,6 +107,12 @@ jobs:
 
       - name: Install test dependencies.
         run: pip3 install -r requirements.txt
+
+      - name: Install Amazon Linux 2 dependencies.
+        run: |
+          sudo amazon-linux-extras install python${{ matrix.python_version }} 
+          sudo amazon-linux-extras install postgresql10
+        if: matrix.distro == 'amazonlinux2'
 
       - name: Run Molecule tests.
         run: molecule test
