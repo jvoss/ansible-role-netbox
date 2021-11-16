@@ -19,14 +19,6 @@
         update_cache: yes
       when: ansible_os_family == 'Debian'
 
-    - name: Install Amazon Linux 2 dependencies
-      ansible.builtin.command: "amazon-linux-extras enable {{ item }} "
-      become: yes
-      with_items:
-        - python3.8
-        - postgresql12
-      when: ansible_distribution == 'Amazon'
-
   tasks:
     # RHEL8+ container images only have C.UTF-8 installed
     - name: Set database locale when using CentOS8/RHEL8+

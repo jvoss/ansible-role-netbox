@@ -1,4 +1,12 @@
 ---
+- name: install.redhat | enable required Amazon Linux 2 extras
+  ansible.builtin.command: "amazon-linux-extras enable {{ item }} "
+  become: yes
+  with_items:
+    - python3.8
+    - postgresql12
+  when: ansible_distribution == 'Amazon'
+
 - name: install.redhat | install required system packages
   ansible.builtin.yum:
     name: "{{ item }}"
@@ -14,6 +22,7 @@
     - libpq-devel
     - openssl-devel
     - redhat-rpm-config
+    - tar # required install on Amazon Linux to untar release
 
 - name: install.redhat | install Git
   ansible.builtin.yum:
