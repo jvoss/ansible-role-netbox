@@ -1,8 +1,8 @@
 ---
-# - name: install.amazon | checking for amazon extras yum repo file
-#   ansible.builtin.stat:
-#     path: /etc/yum.repos.d/amzn2-extras.repo
-#   register: amazon_extras_repo
+- name: install.amazon | checking for amazon extras yum repo file
+  ansible.builtin.stat:
+    path: /etc/yum.repos.d/amzn2-extras.repo
+  register: amazon_extras_repo
 
 - name: install.amazon | checking if required amazon extras are enabled
   ansible.builtin.lineinfile:
@@ -11,7 +11,7 @@
     regexp: "^\\[amzn2extra-{{ item }}\\]"
     state: present
   check_mode: yes
-  # when: amazon_extras_repo.stat.exists
+  when: amazon_extras_repo.stat.exists
   register: amzn2extras
   with_items:
     - python3.8
@@ -23,8 +23,7 @@
   with_items:
     - python3.8
     - postgresql12
-  # when: not amazon_extras_repo.stat.exists or #file lines not set
-  when: amzn2extra is failed
+  when: not amazon_extras_repo.stat.exists or amzn2extras is failed
 
 - name: install.amazon | install tar
   ansible.builtin.yum:
