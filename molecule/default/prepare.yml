@@ -20,7 +20,7 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install Amazon Linux 2 dependencies
-      ansible.builtin.command: "amazon-linux-extras install {{ item }} "
+      ansible.builtin.command: "amazon-linux-extras enable {{ item }} "
       become: yes
       with_items:
         - python3.8
