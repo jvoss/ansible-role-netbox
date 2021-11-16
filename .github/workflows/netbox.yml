@@ -21,6 +21,7 @@ jobs:
           - ubuntu2004
         netbox:
           - v3.0.9
+          - v3.0.10
 
     services:
       postgres:
