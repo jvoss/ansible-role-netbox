@@ -1,0 +1,16 @@
+---
+- name: install.amazon | enable required extras
+  ansible.builtin.command: "amazon-linux-extras enable {{ item }} "
+  args:
+    # TODO find more suitable itempotency
+    creates: /etc/yum.repos.d/amzn2-extras.repo
+  become: yes
+  with_items:
+    - python3.8
+    - postgresql12
+
+- name: install.amazon | install tar
+  ansible.builtin.yum:
+    name: tar
+    state: present
+  when: netbox_install_method != 'git'
