@@ -65,7 +65,6 @@ jobs:
           - centos8
           - ubuntu2004
         python_version:
-          - 3.7
           - 3.8
           - 3.9
 
