@@ -13,6 +13,7 @@
   check_mode: yes
   when: amazon_extras_repo.stat.exists
   register: amzn2extras
+  changed_when: amzn2extras is failed
   with_items:
     - python3.8
     - postgresql12
