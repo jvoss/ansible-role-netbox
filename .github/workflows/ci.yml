@@ -64,9 +64,6 @@ jobs:
           - amazonlinux2
           - centos8
           - ubuntu2004
-        python_version:
-          - 3.8
-          - 3.9
 
     services:
       postgres:
@@ -99,10 +96,10 @@ jobs:
         with:
           path: 'jvoss.netbox'
 
-      - name: Set up Python 3.
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python_version }}
+          python-version: 3.9
 
       - name: Install test dependencies.
         run: pip3 install -r requirements.txt
