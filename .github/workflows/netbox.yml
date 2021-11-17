@@ -12,7 +12,7 @@ defaults:
 
 jobs:
   netbox:
-    name: Netbox
+    name: ${{ matrix.netbox }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
