@@ -64,8 +64,9 @@ jobs:
         run: pip3 install -r requirements.txt
 
       - name: Run Molecule tests.
-        run: molecule test -s ${{ matrix.netbox }}
+        run: molecule test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}
+          NETBOX_VERSION_TAG: ${{ matrix.netbox }}
