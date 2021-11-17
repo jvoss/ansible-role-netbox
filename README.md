@@ -20,7 +20,8 @@ manage those services within their own roles and playbooks.
 
 Tested on the following platforms:
 * Amazon Linux 2
-* CentOS 8.2+ or Red Hat Enterprise Linux (RHEL) 8.2+
+* CentOS 8 
+* Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
 
 This role will require root access (via sudo) to manage system dependencies and actions
@@ -34,6 +35,9 @@ are available:
     netbox_db_username: netbox
     netbox_db_password: netbox
     netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+
+If the `netbox_secret_key` is omitted a new one will be automatically generated
+on each playbook run.
 
 See [defaults/main.yml](defaults/main.yml) for a complete list of defaults and 
 configurable options.
