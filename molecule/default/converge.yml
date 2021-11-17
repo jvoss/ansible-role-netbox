@@ -3,6 +3,7 @@
   hosts: all
 
   vars:
+    netbox_version_tag: "{{ lookup('env', 'NETBOX_VERSION_TAG') | default() }}"
     netbox_db_username: netbox
     netbox_db_password: netbox
     netbox_napalm:
