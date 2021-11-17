@@ -4,6 +4,7 @@
     url: "https://api.github.com/repos/netbox-community/netbox/releases/latest"
     return_content: true
   register: latest_release
+  when: netbox_version_tag is undefined
 
 - name: download-release | Set latest Netbox version fact
   ansible.builtin.set_fact:
@@ -24,7 +25,7 @@
 
 - name: download-release | Download and extract Netbox version
   ansible.builtin.unarchive:
-    src: "{{ latest_release.json.tarball_url }}"
+    src: "https://github.com/netbox-community/netbox/archive/refs/tags/{{ netbox_version_tag }}.tar.gz"
     dest: "{{ netbox_version_path }}"
     extra_opts:
       - "--strip-components=1"
