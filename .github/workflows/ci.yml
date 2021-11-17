@@ -56,7 +56,7 @@ jobs:
           ansible-lint .
 
   molecule:
-    name: Netbox
+    name: Netbox-latest
     runs-on: ubuntu-latest
     strategy:
       matrix:
