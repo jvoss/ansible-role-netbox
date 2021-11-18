@@ -1,0 +1,32 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    netbox_version_tag: "{{ lookup('env', 'NETBOX_VERSION_TAG') | default() }}"
+    netbox_db_username: netbox
+    netbox_db_password: netbox
+    netbox_napalm:
+      username: napalm
+      password: testing
+      timeout: 30
+      args: {}
+    netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+    netbox_superusers:
+      - username: admin
+        password: admin
+        email: changeme@example.com
+    caddy_config: |
+      :8080 {
+        route /static* {
+          uri strip_prefix /static
+          root * /opt/netbox/current/netbox/static
+          file_server
+        }
+
+        reverse_proxy http://127.0.0.1:8001
+      }
+
+  roles:
+    - role: jvoss.netbox
+    - role: caddy_ansible.caddy_ansible

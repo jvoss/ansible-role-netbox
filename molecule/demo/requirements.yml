@@ -1,0 +1,7 @@
+---
+# Ansible requirements
+
+roles:
+  - name: geerlingguy.postgresql
+  - name: geerlingguy.redis
+  - name: caddy_ansible.caddy_ansible

@@ -1,0 +1,41 @@
+---
+# This scenario runs a complete Netbox installation with the Docker
+# network in bridged mode in order to locally demo the UI.
+#
+#   # 1) Optional - specify the desired version (useful for pre-release testing)
+#   export NETBOX_VERSION_TAG=v3.0.10
+#
+#   # 2) Converge the 'demo scenario'
+#   molecule converge -s demo
+#
+#   # 3) View the exposed ephemeral mapped port
+#   docker ps
+#
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+
+platforms:
+  - name: instance
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    network_mode: bridge
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    published_ports:
+      - 8080/tcp
+
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../default/prepare.yml
+    verify: ../default/verify.yml
