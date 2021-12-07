@@ -31,6 +31,11 @@
   register: netbox_auth_ldap_requirements
   when: netbox_auth_ldap is defined
 
+- name: configure | set netbox_override_dynamic_config True for Netbox < 3.1.0
+  ansible.builtin.set_fact:
+    netbox_override_dynamic_config: True
+  when: netbox_version_tag < 'v3.1.0'
+
 - name: configure | write configuration.py
   ansible.builtin.template:
     src: configuration.py.j2

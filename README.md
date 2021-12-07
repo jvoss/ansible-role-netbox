@@ -1,7 +1,7 @@
 # Ansible Role: Netbox
 
 [![Netbox](
-https://img.shields.io/badge/Netbox-v3.0.12-blue)](https://github.com/netbox-community/netbox)
+https://img.shields.io/badge/Netbox-v3.1.0-blue)](https://github.com/netbox-community/netbox)
 [![CI](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml)
 [![Netbox](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml/badge.svg)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jvoss.netbox-blue.svg)](https://galaxy.ansible.com/jvoss/netbox)
@@ -41,6 +41,13 @@ on each playbook run.
 
 See [defaults/main.yml](defaults/main.yml) for a complete list of defaults and 
 configurable options.
+
+**Note**: Version 3.1+ introduced
+[Dynamic Configuration Settings](https://netbox.readthedocs.io/en/stable/configuration/dynamic-settings/).
+These configuration options may still be written to `configuration.py` preventing
+modification via the UI. However, by default, this role *always* omits these
+parameters unless `netbox_override_dynamic_config` is set to `True`. See 
+[defaults/main.yml#L82](defaults/main.yml#L82) for details.
 
 ## User accounts
 

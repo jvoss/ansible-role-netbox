@@ -79,6 +79,11 @@ netbox_redis_tls_insecure: False
 
 ### Netbox Optional settings ###
 
+# Override Netbox >= v3.1 Dynamic Configuration Settings by writing configuration
+# parameters that have been moved to Netbox's admin interface:
+# https://netbox.readthedocs.io/en/stable/configuration/dynamic-settings/
+netbox_override_dynamic_config: False
+
 # Specify one or more name and email address tuples representing NetBox
 # administrators. These people will be notified of application errors (assuming
 # correct email settings are provided).
@@ -87,6 +92,7 @@ netbox_admins: []
 #   - ['John Doe', 'jdoe@example.com']
 
 # URL schemes that are allowed within links in Netbox
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_allowed_url_schemes:
   - file
   - ftp
@@ -106,11 +112,13 @@ netbox_allowed_url_schemes:
 # Optionally display a persistent banner at the top and/or bottom of every page.
 # HTML is allowed. To display the same content in both banners, define
 # BANNER_TOP and set BANNER_BOTTOM = BANNER_TOP.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_banner:
   top:
   bottom:
 
 # Text to include on the login page above the login form. HTML is allowed.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_banner_login:
 
 # Base URL path if accessing NetBox within a directory. For example, if
@@ -120,6 +128,7 @@ netbox_base_path:
 
 # Maximum number of days to retain logged changes. Set to 0 to retain changes
 # indefinitely. (Default: 90)
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_changelog_retention: 90
 
 # API Cross-Origin Resource Sharing (CORS) settings. If CORS_ORIGIN_ALLOW_ALL is set to
@@ -158,6 +167,7 @@ netbox_email:
 # Enforcement of unique IP space can be toggled on a per-VRF basis. To enforce unique IP
 # space within the global table (all prefixes and IP addresses not assigned to a VRF),
 # set ENFORCE_GLOBAL_UNIQUE to True.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_enforce_global_unique: False
 
 # Exempt certain models from the enforcement of view permissions. Models listed here
@@ -166,6 +176,7 @@ netbox_enforce_global_unique: False
 netbox_exempt_view_permissions: []
 
 # Enable the GraphQL API
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_graphql_enabled: True
 
 # HTTP proxies Nautobot should use when sending outbound HTTP requests
@@ -195,15 +206,18 @@ netbox_login_required: False
 netbox_login_timeout: None
 
 # Setting this to True will display a "maintenance mode" banner at the top of every page.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_maintenance_mode: False
 
 # The URL to use when mapping physical addresses or GPS coordinates
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_maps_url: https://maps.google.com/?q=
 
 # An API consumer can request an arbitrary number of objects =by appending the "limit"
 # parameter to the URL (e.g. "?limit=1000"). This setting defines the maximum limit.
 # Setting it to 0 or None will allow an API consumer to request all objects by
 # specifying "?limit=0".
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_max_page_size: 1000
 
 # The file path where uploaded media such as image attachments are stored. A trailing
@@ -229,6 +243,7 @@ netbox_metrics_enabled: False
 
 # Credentials that Netbox will uses to authenticate to devices when connecting
 # via NAPALM.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_napalm:
   username: ''
   password: ''
@@ -240,6 +255,7 @@ netbox_napalm:
   args: {}
 
 # Determine how many objects to display per page within a list. (Default: 50)
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_paginate_count: 50
 
 # Netbox plugins. See README.md for plugin configuration details.
@@ -247,10 +263,12 @@ netbox_plugins: []
 
 # When determining the primary IP address for a device, IPv6 is preferred over
 # IPv4 by default. Set this to True to prefer IPv4 instead.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_prefer_ipv4: False
 
 # Rack elevation size defaults, in pixels. For best results, the ratio of width
 # to height should be roughly 10:1.
+# Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_rack_elevation_default_unit_height: 22
 netbox_rack_elevation_default_unit_width: 220
 
