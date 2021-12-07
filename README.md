@@ -47,7 +47,7 @@ configurable options.
 These configuration options may still be written to `configuration.py` preventing
 modification via the UI. However, by default, this role *always* omits these
 parameters unless `netbox_override_dynamic_config` is set to `True`. See 
-[defaults/main.yml#82](defaults/main.yml#82) for details.
+[defaults/main.yml#L82](defaults/main.yml#L82) for details.
 
 ## User accounts
 
