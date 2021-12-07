@@ -36,7 +36,7 @@
     netbox_override_dynamic_config: True
   when: netbox_version_tag < 'v3.1.0'
 
-- name: configure | write Netbox configuration.py
+- name: configure | write configuration.py
   ansible.builtin.template:
     src: configuration.py.j2
     dest: "{{ netbox_current_path }}/netbox/netbox/configuration.py"
