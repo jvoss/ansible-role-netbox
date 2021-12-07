@@ -61,17 +61,23 @@ ADMINS = {{ netbox_admins|to_json }}
 ADMINS = []
 {% endif %}
 
+{% if netbox_override_dynamic_config %}
 ALLOWED_URL_SCHEMES = (
     '{{ netbox_allowed_url_schemes | join("', '") }}',
 )
+{% endif %}
 
+{% if netbox_override_dynamic_config %}
 BANNER_TOP = '{{ netbox_banner.top }}'
 BANNER_BOTTOM = '{{ netbox_banner.bottom }}'
 BANNER_LOGIN = '{{ netbox_banner_login }}'
+{% endif %}
 
 BASE_PATH = '{{ netbox_base_path }}'
 
+{% if netbox_override_dynamic_config %}
 CHANGELOG_RETENTION = {{ netbox_changelog_retention }}
+{% endif %}
 
 CORS_ORIGIN_ALLOW_ALL = {{ netbox_origin_allow_all }}
 
@@ -87,6 +93,7 @@ CORS_ORIGIN_REGEX_WHITELIST = {{ netbox_cors_origin_regex_whitelist|to_json }}
 CORS_ORIGIN_REGEX_WHITELIST = []
 {% endif %}
 
+{% if netbox_override_dynamic_config %}
 # Specify any custom validators here, as a mapping of model to a list of validators classes. Validators should be
 # instances of or inherit from CustomValidator.
 # from extras.validators import CustomValidator
@@ -100,6 +107,7 @@ CUSTOM_VALIDATORS = {
     #     })
     # ],
 }
+{% endif %}
 
 DEBUG = {{ netbox_debug }}
 
@@ -114,7 +122,9 @@ EMAIL = {
     'FROM_EMAIL': '{{ netbox_email.from_email }}',
 }
 
+{% if netbox_override_dynamic_config %}
 ENFORCE_GLOBAL_UNIQUE = {{ netbox_enforce_global_unique }}
+{% endif %}
 
 {% if netbox_exempt_view_permissions|length > 0 %}
 EXEMPT_VIEW_PERMISSIONS = {{ netbox_exempt_view_permissions|to_json }}
@@ -122,7 +132,9 @@ EXEMPT_VIEW_PERMISSIONS = {{ netbox_exempt_view_permissions|to_json }}
 EXEMPT_VIEW_PERMISSIONS = []
 {% endif %}
 
+{% if netbox_override_dynamic_config %}
 GRAPHQL_ENABLED = {{ netbox_graphql_enabled }}
+{% endif %}
 
 {% if netbox_http_proxies|length > 0 %}
 HTTP_PROXIES = {{ netbox_http_proxies|to_json }}
@@ -140,11 +152,17 @@ LOGIN_REQUIRED = {{ netbox_login_required }}
 
 LOGIN_TIMEOUT = {{ netbox_login_timeout }}
 
+{% if netbox_override_dynamic_config %}
 MAINTENANCE_MODE = {{ netbox_maintenance_mode }}
+{% endif %}
 
+{% if netbox_override_dynamic_config %}
 MAPS_URL = '{{ netbox_maps_url }}'
+{% endif %}
 
+{% if netbox_override_dynamic_config %}
 MAX_PAGE_SIZE = {{ netbox_max_page_size }}
+{% endif %}
 
 {% if netbox_media_root is defined %}
 MEDIA_ROOT = '{{ netbox_media_root }}'
@@ -157,12 +175,16 @@ STORAGE_CONFIG = {{ netbox_storage.config|to_json }}
 
 METRICS_ENABLED = {{ netbox_metrics_enabled }}
 
+{% if netbox_override_dynamic_config %}
 NAPALM_USERNAME = '{{ netbox_napalm.username }}'
 NAPALM_PASSWORD = '{{ netbox_napalm.password }}'
 NAPALM_TIMEOUT  = {{ netbox_napalm.timeout }}
 NAPALM_ARGS     = {{ netbox_napalm.args|to_json }}
+{% endif %}
 
+{% if netbox_override_dynamic_config %}
 PAGINATE_COUNT = {{ netbox_paginate_count }}
+{% endif %}
 
 PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
 
@@ -172,10 +194,14 @@ PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
 {% endfor %}
 PLUGINS_CONFIG = {{ plugins_config | to_json }}
 
+{% if netbox_override_dynamic_config %}
 PREFER_IPV4 = {{ netbox_prefer_ipv4 }}
+{% endif %}
 
+{% if netbox_override_dynamic_config %}
 RACK_ELEVATION_DEFAULT_UNIT_HEIGHT = {{ netbox_rack_elevation_default_unit_height }}
 RACK_ELEVATION_DEFAULT_UNIT_WIDTH = {{ netbox_rack_elevation_default_unit_width }}
+{% endif %}
 
 # Remote authentication support
 REMOTE_AUTH_ENABLED = {{ netbox_remote_auth.enabled }}
