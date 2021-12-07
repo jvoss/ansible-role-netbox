@@ -80,7 +80,7 @@ netbox_redis_tls_insecure: False
 ### Netbox Optional settings ###
 
 # Override Netbox >= v3.1 Dynamic Configuration Settings by writing configuration
-# parameters that have been moved to Netbox's admin interface: 
+# parameters that have been moved to Netbox's admin interface:
 # https://netbox.readthedocs.io/en/stable/configuration/dynamic-settings/
 netbox_override_dynamic_config: False
 
