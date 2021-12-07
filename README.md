@@ -42,6 +42,13 @@ on each playbook run.
 See [defaults/main.yml](defaults/main.yml) for a complete list of defaults and 
 configurable options.
 
+**Note**: Version 3.1+ introduced
+[Dynamic Configuration Settings](https://netbox.readthedocs.io/en/stable/configuration/dynamic-settings/).
+These configuration options may still be written to `configuration.py` preventing
+modification via the UI. However, by default, this role *always* omits these
+parameters unless `netbox_override_dynamic_config` is set to `True`. See 
+[defaults/main.yml#82](defaults/main.yml#82) for details.
+
 ## User accounts
 
 The following variables can be defined to create users during initial
