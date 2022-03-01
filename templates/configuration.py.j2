@@ -111,6 +111,10 @@ CUSTOM_VALIDATORS = {
 
 DEBUG = {{ netbox_debug }}
 
+{% if netbox_default_user_preferences | length > 0 %}
+DEFAULT_USER_PREFERENCES = {{ netbox_default_user_preferences|to_json }}
+{% endif %}
+
 EMAIL = {
     'SERVER': '{{ netbox_email.server }}',
     'PORT': {{ netbox_email.port }},
@@ -136,7 +140,7 @@ EXEMPT_VIEW_PERMISSIONS = []
 FIELD_CHOICES = {
 {% for key,values in netbox_field_choices.items() %}
     {{ key }}: (
-        ({{ values|join(', ') }}),
+        ('{{ values| map('quote') | join('\',\'') }}'),
     )
 {% endfor %}
 }
