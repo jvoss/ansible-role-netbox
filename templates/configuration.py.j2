@@ -111,7 +111,7 @@ CUSTOM_VALIDATORS = {
 
 DEBUG = {{ netbox_debug }}
 
-{% if netbox_default_user_preferences | length > 0 %}
+{% if netbox_default_user_preferences is defined %}
 DEFAULT_USER_PREFERENCES = {{ netbox_default_user_preferences|to_json }}
 {% endif %}
 
@@ -136,7 +136,7 @@ EXEMPT_VIEW_PERMISSIONS = {{ netbox_exempt_view_permissions|to_json }}
 EXEMPT_VIEW_PERMISSIONS = []
 {% endif %}
 
-{% if netbox_field_choices|length > 0 %}
+{% if netbox_field_choices is defined %}
 FIELD_CHOICES = {
 {% for key,values in netbox_field_choices.items() %}
     '{{ key }}': (
