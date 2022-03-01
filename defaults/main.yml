@@ -131,6 +131,22 @@ netbox_base_path:
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_changelog_retention: 90
 
+# Introduced in Netbox v3.2
+# See: https://github.com/netbox-community/netbox/issues/8054
+#
+# Custom choices can be now added to most object status fields in NetBox.
+# This is done by defining the FIELD_CHOICES configuration parameter to map
+# field identifiers to an iterable of custom choices and (optionally) colors.
+# These choices are populated automatically when NetBox initializes.
+# For example, the following configuration will add three custom choices for
+# the site status field, each with a designated color:
+netbox_field_choices: {
+#   dcim.Site.status:
+#     - ['foo', 'Foo', 'red'],
+#     - ['bar', 'Bar', 'green'],
+#     - ['baz', 'Baz', 'blue']
+}
+
 # API Cross-Origin Resource Sharing (CORS) settings. If CORS_ORIGIN_ALLOW_ALL is set to
 # True, all origins will be allowed. Otherwise, define a list of allowed origins using
 # either CORS_ORIGIN_WHITELIST or CORS_ORIGIN_REGEX_WHITELIST. For more information, see
