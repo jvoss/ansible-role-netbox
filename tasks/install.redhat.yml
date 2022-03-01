@@ -9,6 +9,7 @@
     state: present
   loop:
     - gcc
+    - git
     - python38
     - python38-devel
     - python3-pip
