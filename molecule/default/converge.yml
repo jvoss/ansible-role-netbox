@@ -8,7 +8,7 @@
     netbox_db_password: netbox
     netbox_field_choices:
       dcim.Site.status:
-        - ['foo', 'Foo', 'red']
+        - ['foo', 'Foo', 'red'],
         - ['bar', 'Bar', 'green'],
         - ['baz', 'Baz', 'blue']
     netbox_napalm:
