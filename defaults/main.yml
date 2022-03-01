@@ -131,7 +131,24 @@ netbox_base_path:
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_changelog_retention: 90
 
-# Introduced in Netbox v3.2
+# Netbox >3.2
+# See: https://github.com/netbox-community/netbox/issues/7759
+#
+# A robust new mechanism for managing user preferences is included in this
+# release. The user preferences form has been improved for better usability, and
+# administrators can now define default preferences for all users with the
+# DEFAULT_USER_PREFERENCES configuration parameter. For example, this can be
+# used to define the columns which appear by default in a table:
+# netbox_default_user_preferences:
+#   tables:
+#     IPAddressTable:
+#       columns:
+#         - address
+#         - status
+#         - created
+#         - description
+
+# Netbox >3.2
 # See: https://github.com/netbox-community/netbox/issues/8054
 #
 # Custom choices can be now added to most object status fields in NetBox.

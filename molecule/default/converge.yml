@@ -6,11 +6,6 @@
     netbox_version_tag: "{{ lookup('env', 'NETBOX_VERSION_TAG') | default() }}"
     netbox_db_username: netbox
     netbox_db_password: netbox
-    netbox_field_choices:
-      dcim.Site.status:
-        - ['foo', 'Foo', 'red'],
-        - ['bar', 'Bar', 'green'],
-        - ['baz', 'Baz', 'blue']
     netbox_napalm:
       username: napalm
       password: testing
