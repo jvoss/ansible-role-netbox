@@ -140,7 +140,7 @@ EXEMPT_VIEW_PERMISSIONS = []
 FIELD_CHOICES = {
 {% for key,values in netbox_field_choices.items() %}
     {{ key }}: (
-        ('{{ values| map('quote') | join('\',\'') }}'),
+        ('{{ values| join('\',\'') }}'),
     )
 {% endfor %}
 }
