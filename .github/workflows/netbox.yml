@@ -18,7 +18,6 @@ jobs:
       matrix:
         distro:
           - amazonlinux2
-          - centos8
           - rockylinux8
           - ubuntu2004
         netbox:
