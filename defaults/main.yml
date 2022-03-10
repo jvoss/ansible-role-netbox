@@ -139,7 +139,7 @@ netbox_changelog_retention: 90
 # administrators can now define default preferences for all users with the
 # DEFAULT_USER_PREFERENCES configuration parameter. For example, this can be
 # used to define the columns which appear by default in a table:
-# netbox_default_user_preferences:
+netbox_default_user_preferences: {
 #   tables:
 #     IPAddressTable:
 #       columns:
@@ -147,6 +147,7 @@ netbox_changelog_retention: 90
 #         - status
 #         - created
 #         - description
+}
 
 # Netbox >3.2
 # See: https://github.com/netbox-community/netbox/issues/8054
