@@ -23,6 +23,7 @@ jobs:
           - ubuntu2004
         netbox:
           - v3.2-beta2
+          - v3.1.10
           - v3.1.9
           - v3.1.8
           - v3.0.12
