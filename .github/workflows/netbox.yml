@@ -22,10 +22,10 @@ jobs:
           - rockylinux8
           - ubuntu2004
         netbox:
-          - v3.2-beta2
+          # See: https://github.com/jvoss/ansible-role-netbox/pull/22#issuecomment-1080649744
+          # - v3.2-beta2
           - v3.1.10
           - v3.1.9
-          - v3.1.8
           - v3.0.12
           - v3.0.11
 
