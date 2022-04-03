@@ -278,6 +278,13 @@ netbox_metrics_enabled: False
 # Credentials that Netbox will uses to authenticate to devices when connecting
 # via NAPALM.
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
+# Define an empty `netbox_napalm` dict in your variables to install the NAPALM
+# libraries (when using dynamic configuration)
+#
+# netbox_napalm:
+#
+# pre Netbox 3.1:
+#
 # netbox_napalm:
 #   username: ''
 #   password: ''
