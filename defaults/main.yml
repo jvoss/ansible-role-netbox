@@ -177,7 +177,7 @@ netbox_cors_origin_regex_whitelist: [
 
 # Netbox >3.2
 # https://github.com/netbox-community/netbox/issues/8509
-# netbox_csrf_trusted_origins: []
+netbox_csrf_trusted_origins: []
 
 # Set to True to enable server debugging. WARNING: Debugging introduces a substantial
 # performance penalty and may reveal sensitive information about your installation.
@@ -195,6 +195,7 @@ netbox_debug: False
 #         - status
 #         - created
 #         - description
+netbox_default_user_preferences: []
 
 # Email settings
 netbox_email:

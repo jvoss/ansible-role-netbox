@@ -95,7 +95,7 @@ CORS_ORIGIN_REGEX_WHITELIST = {{ netbox_cors_origin_regex_whitelist|to_json }}
 CORS_ORIGIN_REGEX_WHITELIST = []
 {% endif %}
 
-{% if netbox_csrf_trusted_origins is defined %}
+{% if netbox_csrf_trusted_origins | length > 0 %}
 CSRF_TRUSTED_ORIGINS = {{ netbox_csrf_trusted_origins }}
 {% endif %}
 
