@@ -9,7 +9,7 @@
     netbox_field_choices:
       dcim.Site.status:
         - ['foo', 'Foo', 'red']
-        - ['bar', 'Bar', 'green'],
+        - ['bar', 'Bar', 'green']
         - ['baz', 'Baz', 'blue']
     netbox_napalm:
       username: napalm

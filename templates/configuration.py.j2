@@ -61,6 +61,8 @@ ADMINS = {{ netbox_admins|to_json }}
 ADMINS = []
 {% endif %}
 
+AUTH_PASSWORD_VALIDATORS = {{ netbox_auth_password_validators|to_json }}
+
 {% if netbox_override_dynamic_config %}
 ALLOWED_URL_SCHEMES = (
     '{{ netbox_allowed_url_schemes | join("', '") }}',
@@ -91,6 +93,10 @@ CORS_ORIGIN_WHITELIST = []
 CORS_ORIGIN_REGEX_WHITELIST = {{ netbox_cors_origin_regex_whitelist|to_json }}
 {% else %}
 CORS_ORIGIN_REGEX_WHITELIST = []
+{% endif %}
+
+{% if netbox_csrf_trusted_origins is defined %}
+CSRF_TRUSTED_ORIGINS = {{ netbox_csrf_trusted_origins }}
 {% endif %}
 
 {% if netbox_override_dynamic_config %}
