@@ -10,6 +10,16 @@
     mode: '0644'
     create: yes
 
+- name: configure | add NAPALM to local_requirements.txt
+  ansible.builtin.lineinfile:
+    path: "{{ netbox_current_path }}/local_requirements.txt"
+    line: "napalm"
+    regexp: "^napalm"
+    owner: "{{ netbox_user }}"
+    mode: '0644'
+    create: yes
+  when: netbox_napalm is defined
+
 - name: configure | generate django secret key
   ansible.builtin.command: "python3 {{ netbox_current_path }}/netbox/generate_secret_key.py"
   register: netbox_secret_key_generated
