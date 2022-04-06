@@ -6,7 +6,6 @@
   become: yes
   become_method: sudo
   become_user: "{{ netbox_user }}"
-  listen: upgrade_netbox
   notify: restart_netbox
   when: netbox_current_symlink.changed or netbox_auth_ldap_requirements.changed or netbox_napalm_step.changed
   tags:
