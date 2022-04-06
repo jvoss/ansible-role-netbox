@@ -112,7 +112,6 @@ netbox_allowed_url_schemes:
 # Enforce password validation for local accounts
 # Netbox >= 3.2 (https://github.com/netbox-community/netbox/issues/7650)
 # https://docs.djangoproject.com/en/4.0/topics/auth/passwords/#password-validation
-netbox_auth_password_validators: []
 # netbox_auth_password_validators:
 #   - NAME: django.contrib.auth.password_validation.UserAttributeSimilarityValidator
 #   - NAME: django.contrib.auth.password_validation.MinimumLengthValidator
@@ -195,7 +194,6 @@ netbox_debug: False
 #         - status
 #         - created
 #         - description
-netbox_default_user_preferences: []
 
 # Email settings
 netbox_email:

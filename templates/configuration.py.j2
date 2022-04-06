@@ -61,7 +61,9 @@ ADMINS = {{ netbox_admins|to_json }}
 ADMINS = []
 {% endif %}
 
+{% if netbox_auth_password_validators is defined %}
 AUTH_PASSWORD_VALIDATORS = {{ netbox_auth_password_validators|to_json }}
+{% endif %}
 
 {% if netbox_override_dynamic_config %}
 ALLOWED_URL_SCHEMES = (
@@ -117,7 +119,7 @@ CUSTOM_VALIDATORS = {
 
 DEBUG = {{ netbox_debug }}
 
-{% if netbox_default_user_preferences | length > 0 %}
+{% if netbox_default_user_preferences is defined %}
 DEFAULT_USER_PREFERENCES = {{ netbox_default_user_preferences|to_json }}
 {% endif %}
 
