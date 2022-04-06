@@ -61,6 +61,10 @@ ADMINS = {{ netbox_admins|to_json }}
 ADMINS = []
 {% endif %}
 
+{% if netbox_auth_password_validators is defined %}
+AUTH_PASSWORD_VALIDATORS = {{ netbox_auth_password_validators|to_json }}
+{% endif %}
+
 {% if netbox_override_dynamic_config %}
 ALLOWED_URL_SCHEMES = (
     '{{ netbox_allowed_url_schemes | join("', '") }}',
@@ -93,6 +97,10 @@ CORS_ORIGIN_REGEX_WHITELIST = {{ netbox_cors_origin_regex_whitelist|to_json }}
 CORS_ORIGIN_REGEX_WHITELIST = []
 {% endif %}
 
+{% if netbox_csrf_trusted_origins | length > 0 %}
+CSRF_TRUSTED_ORIGINS = {{ netbox_csrf_trusted_origins }}
+{% endif %}
+
 {% if netbox_override_dynamic_config %}
 # Specify any custom validators here, as a mapping of model to a list of validators classes. Validators should be
 # instances of or inherit from CustomValidator.
@@ -111,7 +119,7 @@ CUSTOM_VALIDATORS = {
 
 DEBUG = {{ netbox_debug }}
 
-{% if netbox_default_user_preferences | length > 0 %}
+{% if netbox_default_user_preferences is defined %}
 DEFAULT_USER_PREFERENCES = {{ netbox_default_user_preferences|to_json }}
 {% endif %}
 

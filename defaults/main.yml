@@ -109,6 +109,17 @@ netbox_allowed_url_schemes:
   - vnc
   - xmpp
 
+# Enforce password validation for local accounts
+# Netbox >= 3.2 (https://github.com/netbox-community/netbox/issues/7650)
+# https://docs.djangoproject.com/en/4.0/topics/auth/passwords/#password-validation
+# netbox_auth_password_validators:
+#   - NAME: django.contrib.auth.password_validation.UserAttributeSimilarityValidator
+#   - NAME: django.contrib.auth.password_validation.MinimumLengthValidator
+#     OPTIONS:
+#       min_length: 9
+#   - NAME: django.contrib.auth.password_validation.CommonPasswordValidator
+#   - NAME: django.contrib.auth.password_validation.NumericPasswordValidator
+
 # Optionally display a persistent banner at the top and/or bottom of every page.
 # HTML is allowed. To display the same content in both banners, define
 # BANNER_TOP and set BANNER_BOTTOM = BANNER_TOP.
@@ -131,25 +142,7 @@ netbox_base_path:
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_changelog_retention: 90
 
-# Netbox >3.2
-# See: https://github.com/netbox-community/netbox/issues/7759
-#
-# A robust new mechanism for managing user preferences is included in this
-# release. The user preferences form has been improved for better usability, and
-# administrators can now define default preferences for all users with the
-# DEFAULT_USER_PREFERENCES configuration parameter. For example, this can be
-# used to define the columns which appear by default in a table:
-netbox_default_user_preferences: {
-#   tables:
-#     IPAddressTable:
-#       columns:
-#         - address
-#         - status
-#         - created
-#         - description
-}
-
-# Netbox >3.2
+# Introduced in Netbox v3.2
 # See: https://github.com/netbox-community/netbox/issues/8054
 #
 # Custom choices can be now added to most object status fields in NetBox.
@@ -181,11 +174,26 @@ netbox_cors_origin_regex_whitelist: [
   # "r'^https?://)?(\w+\.)?example\.com$'"
 ]
 
+# Netbox >3.2
+# https://github.com/netbox-community/netbox/issues/8509
+netbox_csrf_trusted_origins: []
+
 # Set to True to enable server debugging. WARNING: Debugging introduces a substantial
 # performance penalty and may reveal sensitive information about your installation.
 # Only enable debugging while performing testing. Never enable debugging on a production
 # system.
 netbox_debug: False
+
+# Default user preferences (https://github.com/netbox-community/netbox/issues/7759)
+# Added in netbox >= 3.2
+# netbox_default_user_preferences:
+#   tables:
+#     IPAddressTable:
+#       columns:
+#         - address
+#         - status
+#         - created
+#         - description
 
 # Email settings
 netbox_email:
