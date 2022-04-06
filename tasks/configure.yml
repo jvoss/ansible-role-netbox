@@ -18,6 +18,7 @@
     owner: "{{ netbox_user }}"
     mode: '0644'
     create: yes
+  register: netbox_napalm_step
   when: netbox_napalm is defined
 
 - name: configure | generate django secret key
