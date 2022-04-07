@@ -10,10 +10,6 @@
     state: present
   loop:
     - git
-    - python3.8
-    - python3-pip
-    - python3.8-venv
-    - python3.8-dev
     - build-essential
     - libxml2-dev
     - libxslt1-dev
@@ -21,6 +17,11 @@
     - libpq-dev
     - libssl-dev
     - zlib1g-dev
+
+- name: install.debian | install required python packages
+  ansible.builtin.apt:
+    name: "{{ python_packages }}"
+    state: present
 
 - name: install.debian | install Git
   ansible.builtin.apt:

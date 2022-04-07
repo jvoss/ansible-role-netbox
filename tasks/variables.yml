@@ -1,0 +1,10 @@
+---
+# Variable configuration.
+- name: Include OS-specific variables (Debian).
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Define python_packages.
+  ansible.builtin.set_fact:
+    python_packages: "{{ __python_packages | list }}"
+  when: python_packages is not defined

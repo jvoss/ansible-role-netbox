@@ -1,4 +1,7 @@
 ---
+# Variable configuration.
+- include_tasks: variables.yml
+
 - name: Include system packages
   include_tasks: "install.{{ ansible_os_family | lower }}.yml"
   args:

@@ -18,6 +18,10 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - focal
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
   galaxy_tags:
     - netbox
     - networking
