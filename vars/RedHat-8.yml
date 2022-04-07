@@ -1,0 +1,5 @@
+---
+__python_packages:
+    - python38
+    - python38-devel
+    - python3-pip

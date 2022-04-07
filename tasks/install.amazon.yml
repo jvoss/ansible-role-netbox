@@ -15,14 +15,14 @@
   register: amzn2extras
   changed_when: amzn2extras is failed
   with_items:
-    - python3.8
+    - "{{ python_packages }}"
     - postgresql12
 
 - name: install.amazon | enable required extras
   ansible.builtin.command: "amazon-linux-extras enable {{ item }} "
   become: yes
   with_items:
-    - python3.8
+    - "{{ python_packages }}"
     - postgresql12
   when: not amazon_extras_repo.stat.exists or amzn2extras is failed
 

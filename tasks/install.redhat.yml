@@ -10,15 +10,17 @@
   loop:
     - gcc
     - git
-    - python38
-    - python38-devel
-    - python3-pip
     - libxml2-devel
     - libxslt-devel
     - libffi-devel
     - libpq-devel
     - openssl-devel
     - redhat-rpm-config
+
+- name: install.redhat | install required python packages
+  ansible.builtin.yum:
+    name: "{{ python_packages }}"
+    state: present
 
 - name: install.redhat | install Git
   ansible.builtin.yum:
