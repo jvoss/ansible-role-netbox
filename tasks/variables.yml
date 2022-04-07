@@ -18,3 +18,8 @@
   ansible.builtin.set_fact:
     python_packages: "{{ __python_packages | list }}"
   when: python_packages is not defined
+
+- name: Define python_version.
+  ansible.builtin.set_fact:
+    python_version: "{{ __python_version }}"
+  when: python_version is not defined

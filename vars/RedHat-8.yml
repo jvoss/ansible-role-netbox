@@ -1,5 +1,6 @@
 ---
+__python_version: "3.8"
 __python_packages:
-    - python38
-    - python38-devel
-    - python3-pip
+    - "python{{ python_version | replace('.','') }}"
+    - "python{{ python_version | replace('.','') }}-devel"
+    - "python3-pip"

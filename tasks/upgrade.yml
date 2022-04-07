@@ -2,7 +2,7 @@
 - name: upgrade | run the upgrade script
   ansible.builtin.command: "{{ netbox_current_path }}/upgrade.sh"
   environment:
-    PYTHON: python3.8
+    PYTHON: "{{ python_version }}"
   become: yes
   become_method: sudo
   become_user: "{{ netbox_user }}"
