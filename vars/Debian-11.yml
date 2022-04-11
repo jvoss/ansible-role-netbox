@@ -1,7 +1,7 @@
 ---
 __python_version: "3.9"
 __python_packages:
-    - "python{{ python_version }}"
+    - "python{{ python_version | default(__python_version) }}"
     - "python3-pip"
-    - "python{{ python_version }}-venv"
-    - "python{{ python_version }}-dev"
+    - "python{{ python_version | default(__python_version) }}-venv"
+    - "python{{ python_version | default(__python_version) }}-dev"
