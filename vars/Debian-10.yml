@@ -1,7 +1,10 @@
 ---
-__python_version: "3.8"
+__python_version: "3.7"
+# this is the last supported available version of python on debian 10.
 __python_packages:
     - "python{{ python_version | default(__python_version) }}"
     - "python3-pip"
     - "python{{ python_version | default(__python_version) }}-venv"
     - "python{{ python_version | default(__python_version) }}-dev"
+netbox_version_tag: v3.1.11
+# this is the last supported version of netbox on debian 10.
