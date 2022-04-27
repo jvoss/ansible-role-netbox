@@ -8,24 +8,27 @@ https://img.shields.io/badge/Netbox-v3.2.1-blue)](https://github.com/netbox-comm
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/56786?color=blue)](https://galaxy.ansible.com/jvoss/netbox)
 [![Version](https://img.shields.io/github/release/jvoss/ansible-role-netbox.svg)](https://github.com/jvoss/ansible-role-netbox/releases/)
 
-Installs and configures [Netbox](https://github.com/netbox-community/netbox) on
-RHEL/CentOS or Ubuntu servers.
+Installs, configures and maintains [NetBox](https://github.com/netbox-community/netbox)
 
 ## Requirements
 
-This role manages the installation and configuration of Netbox. This role
+This role manages the installation and configuration of NetBox. This role
 does not provide PostgreSQL or Redis services that are required dependencies
 of the application. Those tasks are intentionally left to allow the user to 
 manage those services within their own roles and playbooks.
 
 Tested on the following platforms:
 * Amazon Linux 2
-* CentOS 8 
+* CentOS 8
+* Debian Buster (up to v3.1.11)
+* Debian Bullseye
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
 
 This role will require root access (via sudo) to manage system dependencies and actions
 on behalf of netbox.
+
+Supports NetBox versions 3+
 
 ## Role variables
 
