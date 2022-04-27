@@ -1,0 +1,25 @@
+---
+# Variable configuration.
+- name: Include OS-specific variables (Debian).
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Include OS-specific variables (RedHat).
+  ansible.builtin.include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when:
+  - ansible_os_family == 'RedHat'
+  - ansible_distribution != 'Amazon'
+
+- name: Include OS-specific variables (Amazon).
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution == 'Amazon'
+
+- name: Define python_packages.
+  ansible.builtin.set_fact:
+    python_packages: "{{ __python_packages | list }}"
+  when: python_packages is not defined
+
+- name: Define python_version.
+  ansible.builtin.set_fact:
+    python_version: "{{ __python_version }}"
+  when: python_version is not defined

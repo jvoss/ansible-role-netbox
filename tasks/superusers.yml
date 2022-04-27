@@ -20,5 +20,6 @@
     label: "{{ item.username }}"
   changed_when: '"Superuser created successfully." in result.stdout'
   failed_when: >
+    (result.rc != 0) and
     (result.stderr != '') and
     ("CommandError: Error: That username is already taken." not in result.stderr)
