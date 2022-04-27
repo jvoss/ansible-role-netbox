@@ -30,9 +30,9 @@ jobs:
           - v3.0.12
         exclude:
           - distro: debian10
-            netbox: 
-              - v3.2.0
-              - v3.2.1
+            netbox: v3.2.0
+          - distro: debian10
+            netbox: v3.2.1
 
     services:
       postgres:
