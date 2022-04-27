@@ -19,13 +19,21 @@ jobs:
         distro:
           - amazonlinux2
           - centos8
+          - debian10
+          - debian11
           - rockylinux8
           - ubuntu2004
         netbox:
           - v3.2.1
-          - v3.2.0
           - v3.1.11
           - v3.0.12
+        exclude:
+          - distro: debian10
+        include:
+          - distro: debian10
+            netbox: v3.1.11
+          - distro: debian10
+            netbox: v3.0.12
 
     services:
       postgres:
