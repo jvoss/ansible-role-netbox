@@ -12,53 +12,57 @@ At the completion of this play netbox will be available at: `http://<host_ip>:80
 
 ## Host variables
 
-    # netbox.example.com.yml
+```yaml
+# netbox.example.com.yml
 
-    netbox_home: /opt/netbox
-    netbox_version_tag: v3.0.9
-    netbox_db_username: netbox
-    netbox_db_password: password
-    netbox_secret_key: "-nit@y=2#)u2dz-e(de1$t*4mxpy4d9o(b4j5xf@6!ql=r-14o"
+netbox_home: /opt/netbox
+netbox_version_tag: v3.0.9
+netbox_db_username: netbox
+netbox_db_password: password
+netbox_secret_key: "-nit@y=2#)u2dz-e(de1$t*4mxpy4d9o(b4j5xf@6!ql=r-14o"
 
-    netbox_superusers:        
-      - username: admin
-        password: admin
-        email: admin@example.com
+netbox_superusers:        
+  - username: admin
+    password: admin
+    email: admin@example.com
 
-    # caddy_ansible.caddy_ansible configuration
-    caddy_config: |
-      :8080 {
-        route /static* {
-          uri strip_prefix /static
-          root * /opt/netbox/current/netbox/static
-          file_server
-        }
+# caddy_ansible.caddy_ansible configuration
+caddy_config: |
+  :8080 {
+    route /static* {
+      uri strip_prefix /static
+      root * /opt/netbox/current/netbox/static
+      file_server
+    }
 
-        reverse_proxy http://127.0.0.1:8001
-      }
+    reverse_proxy http://127.0.0.1:8001
+  }
 
-    # geerlingguy.postgresql configuration
-    postgresql_users:
-      - name: "{{ netbox_db_username }}"
-        password: "{{ netbox_db_password }}"
-        db: "{{ netbox_db_name }}"
-    postgresql_databases:
-      - name: "{{ netbox_db_name }}"
-        owner: "{{ netbox_db_username }}"
+# geerlingguy.postgresql configuration
+postgresql_users:
+  - name: "{{ netbox_db_username }}"
+    password: "{{ netbox_db_password }}"
+    db: "{{ netbox_db_name }}"
+postgresql_databases:
+  - name: "{{ netbox_db_name }}"
+    owner: "{{ netbox_db_username }}"
+```
 
 ## Playbook
 
-    # playbook-netbox.yml
+```yaml
+# playbook-netbox.yml
 
-    - hosts: netbox.example.com
-      gather_facts: yes
-      become: yes
+- hosts: netbox.example.com
+  gather_facts: yes
+  become: yes
 
-      roles:
-        - role: geerlingguy.postgresql
-        - role: geerlingguy.redis
-        - role: jvoss.netbox
-        - role: caddy_ansible.caddy_ansible
+  roles:
+    - role: geerlingguy.postgresql
+    - role: geerlingguy.redis
+    - role: jvoss.netbox
+    - role: caddy_ansible.caddy_ansible
+```
 
 ## Notes
 

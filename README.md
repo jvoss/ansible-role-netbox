@@ -35,9 +35,11 @@ Supports NetBox versions 3+
 Minimum required variables assuming `localhost` PostgreSQL and Redis services
 are available:
 
-    netbox_db_username: netbox
-    netbox_db_password: netbox
-    netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+```yaml
+netbox_db_username: netbox
+netbox_db_password: netbox
+netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+```
 
 If the `netbox_secret_key` is omitted a new one will be automatically generated
 on each playbook run.
@@ -57,10 +59,12 @@ parameters unless `netbox_override_dynamic_config` is set to `True`. See
 The following variables can be defined to create users during initial
 installation only:
 
-    netbox_superusers:
-      - username: admin
-        password: admin
-        email: changeme@example.com
+```yaml
+netbox_superusers:
+  - username: admin
+    password: admin
+    email: changeme@example.com
+```
 
 Each user requires a username, password and email address defined. The role will
 attempt to create the defined users only once during initial installation. If 
@@ -80,7 +84,9 @@ Coming soon.
 
 A specific version of netbox can be configured using the variable:
 
-    netbox_version_tag: v3.0.9
+```yaml
+netbox_version_tag: v3.0.9
+```
 
 This tag should match the Github tag name for the release to be installed.
 It will ensure that a specific target is maintained. If not set, each run will
@@ -91,9 +97,11 @@ installation is maintained.
 
 Another option is to deploy from a specifc branch and optionally a specific commit SHA
 
-    netbox_install_method: git
-    netbox_git_branch: master
-    netbox_git_sha: 8f1acb700d72467ffe7ae5c8502422a1eac0693d # optional
+```yaml
+netbox_install_method: git
+netbox_git_branch: master
+netbox_git_sha: 8f1acb700d72467ffe7ae5c8502422a1eac0693d # optional
+```
 
 ## Dependencies
 
