@@ -12,7 +12,6 @@ defaults:
 
 jobs:
   netbox:
-    if: "!(matrix.distro == 'debian10' && matrix.netbox > 'v3.1.11')"
     name: ${{ matrix.netbox }} (${{ matrix.distro }})
     runs-on: ubuntu-latest
     strategy:
@@ -29,6 +28,11 @@ jobs:
           - v3.2.0
           - v3.1.11
           - v3.0.12
+        exclude:
+          - distro: debian10
+            netbox: 
+              - v3.2.0
+              - v3.2.1
 
     services:
       postgres:
