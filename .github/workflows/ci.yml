@@ -63,7 +63,6 @@ jobs:
         distro:
           - amazonlinux2
           - centos8
-          - debian10
           - debian11
           - rockylinux8
           - ubuntu2004
