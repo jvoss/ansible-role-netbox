@@ -102,7 +102,7 @@ netbox_plugins:
     state: absent
 ```
 
-**Note that may be necessary to remove database tables that were installed
+**Note that it may be necessary to remove database tables that were installed
 as part of a plugin.** This role does not manage database tables that may have
 been created as part of a plugin. Please
 [see the documentation](https://docs.netbox.dev/en/stable/plugins/#drop-database-tables)
