@@ -54,7 +54,6 @@
   loop_control:
     label: "{{ item.pip | default('') }}"
   register: netbox_local_requirements
-  notify: netbox_plugin_handlers
   when: item.pip is defined
 
 - name: configure | set netbox_override_dynamic_config True for Netbox < 3.1.0
