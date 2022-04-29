@@ -1,0 +1,27 @@
+---
+- name: plugins | manage plugins listed in local_requirements.txt
+  ansible.builtin.lineinfile:
+    path: "{{ netbox_current_path }}/local_requirements.txt"
+    line: "{{ item.pip }}"
+    regexp: "^{{ item.pip }}"
+    owner: "{{ netbox_user }}"
+    mode: '0644'
+    create: yes
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ netbox_plugins }}"
+  loop_control:
+    label: "{{ item.pip | default('') }}"
+  register: netbox_local_requirements
+  when: item.pip is defined
+
+- name: plugins | uninstall pip plugins marked absent
+  ansible.builtin.pip:
+    name: "{{ item.pip }}"
+    virtualenv: "{{ netbox_current_path }}/venv"
+    state: absent
+  loop: "{{ netbox_plugins }}"
+  loop_control: "{{ item.pip | default('') }}"
+  notify: restart_netbox
+  when: 
+    - item.pip is defined
+    - item.state == 'absent'

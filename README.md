@@ -91,6 +91,23 @@ netbox_plugins:
       asdot: True
 ```
 
+### Removing Plugins
+To remove a plugin, an `absent` state can be assigned to the `netbox_plugins`
+entry:
+
+```yaml
+netbox_plugins:
+  - name: netbox_bgp    # Plugin name
+    pip: netbox-bgp     # Pip module name
+    state: absent
+```
+
+**Note that may be necessary to remove database tables that were installed
+as part of the plugin.** This role does not manage database tables that may have
+been created as part of the plugin. Please
+[see the documentation](https://docs.netbox.dev/en/stable/plugins/#drop-database-tables)
+for more information on table management.
+
 ## Version locking
 
 A specific version of netbox can be configured using the variable:
