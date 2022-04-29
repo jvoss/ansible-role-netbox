@@ -1,5 +1,7 @@
 # {{ ansible_managed }}
 
+import json
+
 #########################
 #                       #
 #   Required settings   #
@@ -214,7 +216,7 @@ PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
 {% for plugin in netbox_plugins %}
 {% set x = plugins_config.__setitem__(plugin.name, plugin.config) %}
 {% endfor %}
-PLUGINS_CONFIG = {{ plugins_config | to_json }}
+PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
 {% if netbox_override_dynamic_config %}
 PREFER_IPV4 = {{ netbox_prefer_ipv4 }}

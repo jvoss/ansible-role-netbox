@@ -78,7 +78,18 @@ information about available external authentication methods.
 
 ## Plugins 
 
-Coming soon.
+Netbox plugins that are pip modules can be installed and configured by setting
+the `netbox_plugins` list variable. Below is an example for the Netbox BGP
+plugin.
+
+```yaml
+netbox_plugins:
+  - name: netbox_bgp    # Plugin name
+    pip: netbox-bgp     # Pip module name
+    config:             # Plugin configuration
+      device_ext_page: left
+      asdot: True
+```
 
 ## Version locking
 

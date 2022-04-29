@@ -1,0 +1,13 @@
+---
+- name: plugins | install pip packages
+  ansible.builtin.pip:
+    name: "{{ item.pip }}"
+    virtualenv: "{{ netbox_current_path }}"
+    virtualenv_command: python3 -m venv
+  become: yes
+  become_user: "{{ netbox_user }}"
+  notify: netbox_plugin_handlers
+  loop: "{{ netbox_plugins }}"
+  loop_control: 
+    label: "{{ item.pip | default('') }}"
+  when: "{{ item.pip is defined }}"
