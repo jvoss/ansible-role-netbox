@@ -9,13 +9,29 @@ https://img.shields.io/badge/Netbox-v3.2.2-blue)](https://github.com/netbox-comm
 [![Version](https://img.shields.io/github/release/jvoss/ansible-role-netbox.svg)](https://github.com/jvoss/ansible-role-netbox/releases/)
 
 Installs, configures and maintains [NetBox](https://github.com/netbox-community/netbox)
+on a variety of popular Linux distributions.
 
-## Requirements
+## Contents
+1. [General Information](#general-information)
+    1. [Supported Platforms](#supported-platforms) 
+2. [Role variables](#role-variables)
+3. [User accounts](#user-accounts)
+    1. [External Authentication](#external-authentication)
+4. [Plugins](#plugins)
+    1. [Removing Plugins](#removing-plugins)
+5. [Version Locking](#version-locking)
+6. [Dependencies](#dependencies)
+7. [Example Playbook](#example-playbook)
+8. [Contributing](#contributing)
+
+## General Information
 
 This role manages the installation and configuration of NetBox. This role
 does not provide PostgreSQL or Redis services that are required dependencies
 of the application. Those tasks are intentionally left to allow the user to 
 manage those services within their own roles and playbooks.
+
+### Supported Platforms
 
 Tested on the following platforms:
 * Amazon Linux 2
