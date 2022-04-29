@@ -214,7 +214,7 @@ PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
 
 {% set plugins_config = dict() %}
 {% for plugin in netbox_plugins %}
-{% set x = plugins_config.__setitem__(plugin.name, plugin.config) %}
+{% set x = plugins_config.__setitem__(plugin.name, (plugin.config | default({}))) %}
 {% endfor %}
 PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
