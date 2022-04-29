@@ -2,7 +2,7 @@
 - name: plugins | install pip packages
   ansible.builtin.pip:
     name: "{{ item.pip }}"
-    virtualenv: "{{ netbox_current_path }}"
+    virtualenv: "{{ netbox_current_path }}/venv"
     virtualenv_command: python3 -m venv
   become: yes
   become_user: "{{ netbox_user }}"
