@@ -70,9 +70,7 @@
     mode: '0664'
   become: yes
   become_user: "{{ netbox_user }}"
-  notify: 
-    - netbox_plugin_handlers
-    - restart_netbox
+  notify: restart_netbox
 
 - name: configure | write ldap_config.py
   ansible.builtin.template:
