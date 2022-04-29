@@ -210,11 +210,17 @@ NAPALM_ARGS     = {{ netbox_napalm.args|to_json }}
 PAGINATE_COUNT = {{ netbox_paginate_count }}
 {% endif %}
 
-PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
+PLUGINS = [
+{% for plugin in netbox_plugins %}
+{{ plugin.name if plugin.state | default('present') == 'present' }},
+{% endfor %}
+]
 
 {% set plugins_config = dict() %}
 {% for plugin in netbox_plugins %}
+{% if plugin.state | default('present') == 'present' %}
 {% set x = plugins_config.__setitem__(plugin.name, (plugin.config | default({}))) %}
+{% endfor %}
 {% endfor %}
 PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
