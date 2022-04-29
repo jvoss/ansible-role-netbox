@@ -78,7 +78,35 @@ information about available external authentication methods.
 
 ## Plugins 
 
-Coming soon.
+Netbox plugins that are pip modules can be installed and configured by setting
+the `netbox_plugins` list variable. Below is an example for the Netbox BGP
+plugin.
+
+```yaml
+netbox_plugins:
+  - name: netbox_bgp    # Plugin name
+    pip: netbox-bgp     # Pip module name
+    config:             # Plugin configuration
+      device_ext_page: left
+      asdot: True
+```
+
+### Removing Plugins
+To remove a plugin, an `absent` state can be assigned to the `netbox_plugins`
+entry:
+
+```yaml
+netbox_plugins:
+  - name: netbox_bgp    # Plugin name
+    pip: netbox-bgp     # Pip module name
+    state: absent
+```
+
+**Note that it may be necessary to remove database tables that were installed
+as part of a plugin.** This role does not manage database tables that may have
+been created as part of a plugin. Please
+[see the documentation](https://docs.netbox.dev/en/stable/plugins/#drop-database-tables)
+for more information on table management.
 
 ## Version locking
 

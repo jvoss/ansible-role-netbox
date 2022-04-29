@@ -1,5 +1,7 @@
 # {{ ansible_managed }}
 
+import json
+
 #########################
 #                       #
 #   Required settings   #
@@ -208,13 +210,21 @@ NAPALM_ARGS     = {{ netbox_napalm.args|to_json }}
 PAGINATE_COUNT = {{ netbox_paginate_count }}
 {% endif %}
 
-PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
+PLUGINS = [
+{%- for plugin in netbox_plugins %}
+{%- if plugin.state | default('present') == 'present' %}
+'{{ plugin.name }}',
+{%- endif %}
+{%- endfor %}
+]
 
 {% set plugins_config = dict() %}
 {% for plugin in netbox_plugins %}
-{% set x = plugins_config.__setitem__(plugin.name, plugin.config) %}
+{% if plugin.state | default('present') == 'present' %}
+{% set x = plugins_config.__setitem__(plugin.name, (plugin.config | default({}))) %}
+{% endif %}
 {% endfor %}
-PLUGINS_CONFIG = {{ plugins_config | to_json }}
+PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
 {% if netbox_override_dynamic_config %}
 PREFER_IPV4 = {{ netbox_prefer_ipv4 }}

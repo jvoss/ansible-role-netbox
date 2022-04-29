@@ -39,7 +39,7 @@
     owner: "{{ netbox_user }}"
     mode: '0644'
     create: yes
-  register: netbox_auth_ldap_requirements
+  register: netbox_local_requirements
   when: netbox_auth_ldap is defined
 
 - name: configure | set netbox_override_dynamic_config True for Netbox < 3.1.0
