@@ -213,9 +213,9 @@ PAGINATE_COUNT = {{ netbox_paginate_count }}
 PLUGINS = [
 {%- for plugin in netbox_plugins %}
 {%- if plugin.state | default('present') == 'present' %}
-{{ plugin.name }},
-{% endif -%}
-{% endfor -%}
+'{{ plugin.name }}',
+{%- endif %}
+{%- endfor %}
 ]
 
 {% set plugins_config = dict() %}
