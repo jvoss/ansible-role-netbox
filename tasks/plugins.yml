@@ -25,4 +25,4 @@
   notify: restart_netbox
   when:
     - item.pip is defined
-    - item.state | defualt('present') == 'absent'
+    - item.state | default('present') == 'absent'
