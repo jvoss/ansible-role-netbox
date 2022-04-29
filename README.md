@@ -103,8 +103,8 @@ netbox_plugins:
 ```
 
 **Note that may be necessary to remove database tables that were installed
-as part of the plugin.** This role does not manage database tables that may have
-been created as part of the plugin. Please
+as part of a plugin.** This role does not manage database tables that may have
+been created as part of a plugin. Please
 [see the documentation](https://docs.netbox.dev/en/stable/plugins/#drop-database-tables)
 for more information on table management.
 
