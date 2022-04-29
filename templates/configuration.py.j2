@@ -220,6 +220,7 @@ PLUGINS = [
 {% for plugin in netbox_plugins %}
 {% if plugin.state | default('present') == 'present' %}
 {% set x = plugins_config.__setitem__(plugin.name, (plugin.config | default({}))) %}
+{% endif %}
 {% endfor %}
 PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
