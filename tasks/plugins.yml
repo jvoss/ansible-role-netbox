@@ -10,4 +10,4 @@
   loop: "{{ netbox_plugins }}"
   loop_control: 
     label: "{{ item.pip | default('') }}"
-  when: "{{ item.pip is defined }}"
+  when: item.pip is defined
