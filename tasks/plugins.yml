@@ -20,8 +20,9 @@
     virtualenv: "{{ netbox_current_path }}/venv"
     state: absent
   loop: "{{ netbox_plugins }}"
-  loop_control: "{{ item.pip | default('') }}"
+  loop_control:
+    label: "{{ item.pip | default('') }}"
   notify: restart_netbox
-  when: 
+  when:
     - item.pip is defined
     - item.state == 'absent'
