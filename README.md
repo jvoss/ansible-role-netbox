@@ -10,7 +10,19 @@ https://img.shields.io/badge/Netbox-v3.2.2-blue)](https://github.com/netbox-comm
 
 Installs, configures and maintains [NetBox](https://github.com/netbox-community/netbox)
 
-## Requirements
+## Contents
+1. [General Information](#general-information)
+2. [Role variables](#role-variables)
+3. [User accounts](#user-accounts)
+    1. [External Authentication](#external-authentication)
+4. [Plugins](#plugins)
+    1. [Removing Plugins](#removing-plugins)
+5. [Version Locking](#version-locking)
+6. [Dependencies](#dependencies)
+7. [Example Playbook](#example-playbook)
+8. [Contributing](#contributing)
+
+## General Information
 
 This role manages the installation and configuration of NetBox. This role
 does not provide PostgreSQL or Redis services that are required dependencies
