@@ -1,5 +1,7 @@
 # {{ ansible_managed }}
 
+import json
+
 #########################
 #                       #
 #   Required settings   #
@@ -208,13 +210,21 @@ NAPALM_ARGS     = {{ netbox_napalm.args|to_json }}
 PAGINATE_COUNT = {{ netbox_paginate_count }}
 {% endif %}
 
-PLUGINS = {{ netbox_plugins | map(attribute='name') | to_json }}
+PLUGINS = [
+{%- for plugin in netbox_plugins %}
+{%- if plugin.state | default('present') == 'present' %}
+'{{ plugin.name }}',
+{%- endif %}
+{%- endfor %}
+]
 
 {% set plugins_config = dict() %}
 {% for plugin in netbox_plugins %}
-{% set x = plugins_config.__setitem__(plugin.name, plugin.config) %}
+{% if plugin.state | default('present') == 'present' %}
+{% set x = plugins_config.__setitem__(plugin.name, (plugin.config | default({}))) %}
+{% endif %}
 {% endfor %}
-PLUGINS_CONFIG = {{ plugins_config | to_json }}
+PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
 {% if netbox_override_dynamic_config %}
 PREFER_IPV4 = {{ netbox_prefer_ipv4 }}
@@ -231,9 +241,18 @@ REMOTE_AUTH_BACKEND = '{{ netbox_remote_auth.backend }}'
 {% if netbox_remote_auth.header is defined %}
 REMOTE_AUTH_HEADER = '{{ netbox_remote_auth.header }}'
 {% endif %}
-REMOTE_AUTH_AUTO_CREATE_USER = {{ netbox_remote_auth.auto_create_user }}
-REMOTE_AUTH_DEFAULT_GROUPS = {{ netbox_remote_auth.default_groups | to_json }}
-REMOTE_AUTH_DEFAULT_PERMISSIONS = {{ netbox_remote_auth.default_permissions | to_json }}
+REMOTE_AUTH_AUTO_CREATE_USER = {{ netbox_remote_auth.auto_create_user | default('False') }}
+REMOTE_AUTH_DEFAULT_GROUPS = {{ netbox_remote_auth.default_groups | default([]) | to_json }}
+REMOTE_AUTH_DEFAULT_PERMISSIONS = {{ netbox_remote_auth.default_permissions | default({}) | to_json }}
+
+{% if netbox_remote_auth.azuread_oauth2 is defined %}
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = '{{ netbox_remote_auth.azuread_oauth2.key }}'
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = '{{ netbox_remote_auth.azuread_oauth2.secret }}'
+{% endif %}
+
+{% if netbox_remote_auth.social_auth_redirect_is_https is defined %}
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = {{ netbox_remote_auth.social_auth_redirect_is_https }}
+{% endif %}
 
 {% if netbox_release_check_url == 'None' %}
 RELEASE_CHECK_URL = None

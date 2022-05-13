@@ -13,7 +13,7 @@
   register: config_check
   failed_when: "config_check.stdout != 'System check identified no issues (0 silenced).'"
 
-- name: handler | restart Netbox services
+- name: handlers | restart Netbox services
   ansible.builtin.service:
     name: "{{ item }}"
     state: restarted

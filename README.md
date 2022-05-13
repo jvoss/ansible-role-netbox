@@ -1,40 +1,61 @@
 # Ansible Role: Netbox
 
 [![Netbox](
-https://img.shields.io/badge/Netbox-v3.2.1-blue)](https://github.com/netbox-community/netbox)
+https://img.shields.io/badge/Netbox-v3.2.3-blue)](https://github.com/netbox-community/netbox)
 [![CI](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml)
 [![Netbox](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml/badge.svg)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jvoss.netbox-blue.svg)](https://galaxy.ansible.com/jvoss/netbox)
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/56786?color=blue)](https://galaxy.ansible.com/jvoss/netbox)
 [![Version](https://img.shields.io/github/release/jvoss/ansible-role-netbox.svg)](https://github.com/jvoss/ansible-role-netbox/releases/)
 
-Installs and configures [Netbox](https://github.com/netbox-community/netbox) on
-RHEL/CentOS or Ubuntu servers.
+Installs, configures and maintains [NetBox](https://github.com/netbox-community/netbox)
+on a variety of popular Linux distributions.
 
-## Requirements
+## Contents
+1. [General Information](#general-information)
+    1. [Supported Platforms](#supported-platforms) 
+2. [Role variables](#role-variables)
+3. [User accounts](#user-accounts)
+    1. [External Authentication](#external-authentication)
+4. [Plugins](#plugins)
+    1. [Removing Plugins](#removing-plugins)
+5. [Version Locking](#version-locking)
+6. [Dependencies](#dependencies)
+7. [Example Playbook](#example-playbook)
+8. [Contributing](#contributing)
 
-This role manages the installation and configuration of Netbox. This role
+## General Information
+
+This role manages the installation and configuration of NetBox. This role
 does not provide PostgreSQL or Redis services that are required dependencies
 of the application. Those tasks are intentionally left to allow the user to 
 manage those services within their own roles and playbooks.
 
+### Supported Platforms
+
 Tested on the following platforms:
 * Amazon Linux 2
-* CentOS 8 
+* CentOS 8
+* Debian Buster (up to v3.1.11)
+* Debian Bullseye
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
 
 This role will require root access (via sudo) to manage system dependencies and actions
 on behalf of netbox.
 
+Supports NetBox versions 3+
+
 ## Role variables
 
 Minimum required variables assuming `localhost` PostgreSQL and Redis services
 are available:
 
-    netbox_db_username: netbox
-    netbox_db_password: netbox
-    netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+```yaml
+netbox_db_username: netbox
+netbox_db_password: netbox
+netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+```
 
 If the `netbox_secret_key` is omitted a new one will be automatically generated
 on each playbook run.
@@ -54,10 +75,12 @@ parameters unless `netbox_override_dynamic_config` is set to `True`. See
 The following variables can be defined to create users during initial
 installation only:
 
-    netbox_superusers:
-      - username: admin
-        password: admin
-        email: changeme@example.com
+```yaml
+netbox_superusers:
+  - username: admin
+    password: admin
+    email: changeme@example.com
+```
 
 Each user requires a username, password and email address defined. The role will
 attempt to create the defined users only once during initial installation. If 
@@ -71,13 +94,43 @@ information about available external authentication methods.
 
 ## Plugins 
 
-Coming soon.
+Netbox plugins that are pip modules can be installed and configured by setting
+the `netbox_plugins` list variable. Below is an example for the Netbox BGP
+plugin.
+
+```yaml
+netbox_plugins:
+  - name: netbox_bgp    # Plugin name
+    pip: netbox-bgp     # Pip module name
+    config:             # Plugin configuration
+      device_ext_page: left
+      asdot: True
+```
+
+### Removing Plugins
+To remove a plugin, an `absent` state can be assigned to the `netbox_plugins`
+entry:
+
+```yaml
+netbox_plugins:
+  - name: netbox_bgp    # Plugin name
+    pip: netbox-bgp     # Pip module name
+    state: absent
+```
+
+**Note that it may be necessary to remove database tables that were installed
+as part of a plugin.** This role does not manage database tables that may have
+been created as part of a plugin. Please
+[see the documentation](https://docs.netbox.dev/en/stable/plugins/#drop-database-tables)
+for more information on table management.
 
 ## Version locking
 
 A specific version of netbox can be configured using the variable:
 
-    netbox_version_tag: v3.0.9
+```yaml
+netbox_version_tag: v3.0.9
+```
 
 This tag should match the Github tag name for the release to be installed.
 It will ensure that a specific target is maintained. If not set, each run will
@@ -88,9 +141,11 @@ installation is maintained.
 
 Another option is to deploy from a specifc branch and optionally a specific commit SHA
 
-    netbox_install_method: git
-    netbox_git_branch: master
-    netbox_git_sha: 8f1acb700d72467ffe7ae5c8502422a1eac0693d # optional
+```yaml
+netbox_install_method: git
+netbox_git_branch: master
+netbox_git_sha: 8f1acb700d72467ffe7ae5c8502422a1eac0693d # optional
+```
 
 ## Dependencies
 
