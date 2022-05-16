@@ -246,8 +246,14 @@ REMOTE_AUTH_DEFAULT_GROUPS = {{ netbox_remote_auth.default_groups | default([]) 
 REMOTE_AUTH_DEFAULT_PERMISSIONS = {{ netbox_remote_auth.default_permissions | default({}) | to_json }}
 
 {% if netbox_remote_auth.azuread_oauth2 is defined %}
+{% if netbox_remote_auth.backend == 'social_core.backends.azuread_tenant.AzureADTenantOAuth2' %}
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY = '{{ netbox_remote_auth.azuread_oauth2.key }}'
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = '{{ netbox_remote_auth.azuread_oauth2.secret }}'
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_TENANT_ID = '{{ netbox_remote_auth.azuread_oauth2.tenant }}'
+{% else %}
 SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = '{{ netbox_remote_auth.azuread_oauth2.key }}'
 SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = '{{ netbox_remote_auth.azuread_oauth2.secret }}'
+{% endif %}
 {% endif %}
 
 {% if netbox_remote_auth.social_auth_redirect_is_https is defined %}
