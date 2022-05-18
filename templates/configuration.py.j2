@@ -260,6 +260,10 @@ SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = '{{ netbox_remote_auth.azuread_oauth2.secret
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = {{ netbox_remote_auth.social_auth_redirect_is_https }}
 {% endif %}
 
+{% if netbox_remote_auth.social_auth_username_is_full_email is defined %}
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = {{ netbox_remote_auth.social_auth_username_is_full_email }}
+{% endif %}
+
 {% if netbox_release_check_url == 'None' %}
 RELEASE_CHECK_URL = None
 {% else %}
