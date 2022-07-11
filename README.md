@@ -40,6 +40,7 @@ Tested on the following platforms:
 * Debian Bullseye
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
+* Ubuntu 22.04
 
 This role will require root access (via sudo) to manage system dependencies and actions
 on behalf of netbox.
