@@ -66,6 +66,7 @@ jobs:
           - debian11
           - rockylinux8
           - ubuntu2004
+          - ubuntu2204
 
     services:
       postgres:

@@ -23,6 +23,7 @@ jobs:
           - debian11
           - rockylinux8
           - ubuntu2004
+          - ubuntu2204
         netbox:
           - v3.2.6
           - v3.1.11

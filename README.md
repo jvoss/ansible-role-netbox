@@ -26,10 +26,16 @@ on a variety of popular Linux distributions.
 
 ## General Information
 
-This role manages the installation and configuration of NetBox. This role
+This role manages the installation and configuration of NetBox. It
 does not provide PostgreSQL or Redis services that are required dependencies
 of the application. Those tasks are intentionally left to allow the user to 
-manage those services within their own roles and playbooks.
+manage those services within their own roles and playbooks. Please see the 
+[EXAMPLE](EXAMPLE.md) playbook for details about how to manage those services.
+
+Releases are only issued when necessary to support changes in NetBox. This role 
+is continuously tested on new versions of NetBox. Please see the 
+[GitHub](https://github.com/jvoss/ansible-role-netbox) repo for the latest
+compatability information.
 
 ### Supported Platforms
 
@@ -40,6 +46,7 @@ Tested on the following platforms:
 * Debian Bullseye
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
+* Ubuntu 22.04
 
 This role will require root access (via sudo) to manage system dependencies and actions
 on behalf of netbox.
