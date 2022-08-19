@@ -25,7 +25,8 @@ jobs:
           - ubuntu2004
           - ubuntu2204
         netbox:
-          - v3.2.8
+          - v3.3.0
+          - v3.2.9
           - v3.1.11
           - v3.0.12
         exclude:
