@@ -1,4 +1,17 @@
 ---
+# Timezone issues when running upgrade script with versions <= 3.2.9
+# https://github.com/netbox-community/netbox/issues/9986
+# temporary fix:
+- name: configure | add tzdata fix to local_requirements.txt when NetBox <= 3.2.9
+  ansible.builtin.lineinfile:
+    path: "{{ netbox_current_path }}/local_requirements.txt"
+    line: "tzdata==2022.2"
+    regexp: "^tzdata"
+    owner: "{{ netbox_user }}"
+    mode: '0644'
+    create: yes
+  when: netbox_version_tag <= 'v3.2.9'
+
 # version 3.0.10 started throwing a warning during superuser creation
 # uses the package 'redis-py'
 - name: configure | add the HiredisParser local_requirements.txt
