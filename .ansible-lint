@@ -1,3 +1,7 @@
 ---
 skip_list:
+  - name[casing]
   - package-latest  # Package installs should not use latest
+
+warn_list:
+  - experimental

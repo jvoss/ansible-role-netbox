@@ -3,10 +3,9 @@
   ansible.builtin.command: "{{ netbox_current_path }}/upgrade.sh"
   environment:
     PYTHON: "python{{ python_version | default(__python_version) }}"
-  become: yes
+  become: true
   become_method: sudo
   become_user: "{{ netbox_user }}"
   notify: restart_netbox
-  when: netbox_current_symlink.changed or netbox_local_requirements.changed or netbox_napalm_step.changed
-  tags:
-    - skip_ansible_lint # task vs handler to trigger at specific point in run
+  # task vs handler to trigger at specific point in run
+  when: netbox_current_symlink.changed or netbox_local_requirements.changed or netbox_napalm_step.changed # noqa no-handler
