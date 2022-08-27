@@ -4,12 +4,12 @@
     url: "https://api.github.com/repos/netbox-community/netbox/releases/latest"
     return_content: true
   register: latest_release
-  when: netbox_version_tag is undefined or netbox_version_tag|length == 0
+  when: netbox_version_tag is undefined or netbox_version_tag | length == 0
 
 - name: download-release | Set latest Netbox version fact
   ansible.builtin.set_fact:
     netbox_version_tag: "{{ latest_release.json.tag_name }}"
-  when: netbox_version_tag is undefined or netbox_version_tag|length == 0
+  when: netbox_version_tag is undefined or netbox_version_tag | length == 0
 
 - name: download-release | Selected version information
   ansible.builtin.debug:
