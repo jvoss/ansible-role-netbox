@@ -1,6 +1,6 @@
 ---
 __python_version: "3.8"
 __python_packages:
-    - "python{{ python_version | default(__python_version) | replace('.','') }}"
-    - "python{{ python_version | default(__python_version) | replace('.','') }}-devel"
+    - "python{{ python_version | default(__python_version) | replace('.', '') }}"
+    - "python{{ python_version | default(__python_version) | replace('.', '') }}-devel"
     - "python3-pip"
