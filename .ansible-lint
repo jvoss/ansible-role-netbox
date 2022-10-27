@@ -2,6 +2,7 @@
 skip_list:
   - name[casing]
   - package-latest  # Package installs should not use latest
+  - schema[meta]    # Amazon Linux 2 version: 'any' is valid
 
 warn_list:
   - experimental

@@ -8,7 +8,7 @@
       register: services_state
 
     - name: verify Netbox services are running
-      assert:
+      ansible.builtin.assert:
         that: item.state == 'running'
       with_items:
         - "{{ services_state.ansible_facts.services['netbox.service'] }}"

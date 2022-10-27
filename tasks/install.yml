@@ -20,9 +20,9 @@
     - "{{ netbox_home }}/releases"
 
 - name: install | download Netbox via Git
-  include_tasks: download-git.yml
+  ansible.builtin.include_tasks: download-git.yml
   when: netbox_install_method == 'git'
 
 - name: install | download Netbox release
-  include_tasks: download-release.yml
+  ansible.builtin.include_tasks: download-release.yml
   when: netbox_install_method == 'release'
