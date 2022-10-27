@@ -1,30 +1,30 @@
 ---
-# Variable configuration.
-- include_tasks: variables.yml
+- name: Set variables
+  ansible.builtin.include_tasks: variables.yml
 
 - name: Include system packages
-  include_tasks: "install.{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_tasks: "install.{{ ansible_os_family | lower }}.yml"
   args:
     apply:
       become: yes
 
 - name: Include Netbox installation tasks
-  include_tasks: install.yml
+  ansible.builtin.include_tasks: install.yml
 
 - name: Include Netbox configuration tasks
-  include_tasks: configure.yml
+  ansible.builtin.include_tasks: configure.yml
 
 - name: Include Netbox plugin tasks
-  include_tasks: plugins.yml
+  ansible.builtin.include_tasks: plugins.yml
 
 - name: Include Netbox upgrade tasks
-  include_tasks: upgrade.yml
+  ansible.builtin.include_tasks: upgrade.yml
 
 - name: Include super user creation tasks
-  include_tasks: superusers.yml
+  ansible.builtin.include_tasks: superusers.yml
   when:
     - netbox_superusers is defined
     - services_state.ansible_facts.services['netbox.service'] is not defined
 
 - name: Include service management tasks
-  include_tasks: services.yml
+  ansible.builtin.include_tasks: services.yml
