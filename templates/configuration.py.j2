@@ -63,6 +63,10 @@ ADMINS = {{ netbox_admins|to_json }}
 ADMINS = []
 {% endif %}
 
+{% if netbox_allow_token_retrieval is defined %}
+ALLOW_TOKEN_RETRIEVAL = {{ netbox_allow_token_retrieval }}
+{% endif %}
+
 {% if netbox_auth_password_validators is defined %}
 AUTH_PASSWORD_VALIDATORS = {{ netbox_auth_password_validators|to_json }}
 {% endif %}
@@ -232,6 +236,10 @@ PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
 {% if netbox_override_dynamic_config %}
 PREFER_IPV4 = {{ netbox_prefer_ipv4 }}
+{% endif %}
+
+{% if netbox_queue_mappings is defined %}
+QUEUE_MAPPINGS = {{ netbox_queue_mappings | to_json }}
 {% endif %}
 
 {% if netbox_override_dynamic_config %}

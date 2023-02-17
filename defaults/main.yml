@@ -109,6 +109,10 @@ netbox_allowed_url_schemes:
   - vnc
   - xmpp
 
+# Permit the retrieval of API tokens after their creation.
+# Netbox >= 3.4.0
+# netbox_allow_token_retrieval: False
+
 # Enforce password validation for local accounts
 # Netbox >= 3.2 (https://github.com/netbox-community/netbox/issues/7650)
 # https://docs.djangoproject.com/en/4.0/topics/auth/passwords/#password-validation
@@ -318,6 +322,14 @@ netbox_plugins: []
 # IPv4 by default. Set this to True to prefer IPv4 instead.
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_prefer_ipv4: False
+
+# Allows changing which queues are used internally for background tasks.
+# If no queue is defined the queue named `default` will be used.
+# Netbox >= 3.4.0
+netbox_queue_mappings:
+  webhook: low
+  report: high
+  script: high
 
 # Rack elevation size defaults, in pixels. For best results, the ratio of width
 # to height should be roughly 10:1.
