@@ -12,7 +12,7 @@ lint: |
 
 platforms:
   - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     network_mode: host
     volumes:
