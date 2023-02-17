@@ -125,6 +125,10 @@ CUSTOM_VALIDATORS = {
 
 DEBUG = {{ netbox_debug }}
 
+{% if netbox_default_language is defined %}
+DEFAULT_LANGUAGE = '{{ netbox_default_language }}'
+{% endif %}
+
 {% if netbox_default_user_preferences is defined %}
 DEFAULT_USER_PREFERENCES = {{ netbox_default_user_preferences|to_json }}
 {% endif %}

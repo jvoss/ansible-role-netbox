@@ -182,6 +182,10 @@ netbox_cors_origin_regex_whitelist: [
 # https://github.com/netbox-community/netbox/issues/8509
 netbox_csrf_trusted_origins: []
 
+# Set the default preferred language/locale
+# Netbox >= 3.4.1
+# netbox_default_language: en-us
+
 # Set to True to enable server debugging. WARNING: Debugging introduces a substantial
 # performance penalty and may reveal sensitive information about your installation.
 # Only enable debugging while performing testing. Never enable debugging on a production
