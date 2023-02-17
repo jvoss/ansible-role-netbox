@@ -247,6 +247,10 @@ netbox_login_required: False
 # before being prompted to re-authenticate. (Default: 1209600 [14 days])
 netbox_login_timeout: None
 
+# The view name or URL to which users are redirected after logging out.
+# Introducted in v3.3.10
+# netbox_logout_redirect_url: home
+
 # Setting this to True will display a "maintenance mode" banner at the top of every page.
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_maintenance_mode: False

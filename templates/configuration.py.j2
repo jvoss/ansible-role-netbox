@@ -176,6 +176,10 @@ LOGIN_REQUIRED = {{ netbox_login_required }}
 
 LOGIN_TIMEOUT = {{ netbox_login_timeout }}
 
+{% if netbox_logout_redirect_url is defined %}
+LOGOUT_REDIRECT_URL = '{{ netbox_logout_redirect_url }}'
+{% endif %}
+
 {% if netbox_override_dynamic_config %}
 MAINTENANCE_MODE = {{ netbox_maintenance_mode }}
 {% endif %}
