@@ -13,18 +13,13 @@ lint: |
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest"
-<<<<<<< HEAD
     command: ${MOLECULE_DOCKER_COMMAND:-""}
-=======
-    command: ${MOLECULE_DOCKER_COMMAND:-"/sbin/init"}
-    capabilities:
-      - SYS_ADMIN
->>>>>>> 317e9fe... squash
+    cgroupns_mode: host
     network_mode: host
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
 
 provisioner:
   name: ansible
