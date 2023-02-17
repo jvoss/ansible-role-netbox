@@ -67,6 +67,9 @@ netbox_redis_port: 6379
 netbox_redis_tasks_db: 0
 netbox_redis_cache_db: 1
 netbox_redis_tls_insecure: False
+# Set a path to a certificate authority, typically used with a self signed certificate.
+# Netbox >= 3.4.3
+# netbox_redis_ca_cert_path: /etc/ssl/certs/ca.crt
 
 # This key is used for secure generation of random numbers and strings. It must never be exposed outside of this file.
 # For optimal security, SECRET_KEY should be at least 50 characters in length and contain a mix of letters, numbers, and

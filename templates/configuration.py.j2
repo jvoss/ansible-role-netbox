@@ -32,6 +32,9 @@ REDIS = {
         # Set this to True to skip TLS certificate verification
         # This can expose the connection to attacks, be careful
         'INSECURE_SKIP_TLS_VERIFY': {{ netbox_redis_tls_insecure }},
+        {%- if netbox_redis_ca_cert_path is defined +%}
+        'CA_CERT_PATH': {{ netbox_redis_ca_cert_path }},
+        {%- endif +%}
     },
     'caching': {
         'HOST': '{{ netbox_redis_host }}',
@@ -45,6 +48,9 @@ REDIS = {
         # Set this to True to skip TLS certificate verification
         # This can expose the connection to attacks, be careful
         'INSECURE_SKIP_TLS_VERIFY': {{ netbox_redis_tls_insecure }},
+        {%- if netbox_redis_ca_cert_path is defined +%}
+        'CA_CERT_PATH': {{ netbox_redis_ca_cert_path }},
+        {%- endif +%}
     }
 }
 
