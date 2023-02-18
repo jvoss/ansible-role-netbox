@@ -67,6 +67,9 @@ netbox_redis_port: 6379
 netbox_redis_tasks_db: 0
 netbox_redis_cache_db: 1
 netbox_redis_tls_insecure: False
+# Set a path to a certificate authority, typically used with a self signed certificate.
+# Netbox >= 3.4.3
+# netbox_redis_ca_cert_path: /etc/ssl/certs/ca.crt
 
 # This key is used for secure generation of random numbers and strings. It must never be exposed outside of this file.
 # For optimal security, SECRET_KEY should be at least 50 characters in length and contain a mix of letters, numbers, and
@@ -108,6 +111,10 @@ netbox_allowed_url_schemes:
   - tftp
   - vnc
   - xmpp
+
+# Permit the retrieval of API tokens after their creation.
+# Netbox >= 3.4.0
+# netbox_allow_token_retrieval: False
 
 # Enforce password validation for local accounts
 # Netbox >= 3.2 (https://github.com/netbox-community/netbox/issues/7650)
@@ -178,6 +185,10 @@ netbox_cors_origin_regex_whitelist: [
 # https://github.com/netbox-community/netbox/issues/8509
 netbox_csrf_trusted_origins: []
 
+# Set the default preferred language/locale
+# Netbox >= 3.4.1
+# netbox_default_language: en-us
+
 # Set to True to enable server debugging. WARNING: Debugging introduces a substantial
 # performance penalty and may reveal sensitive information about your installation.
 # Only enable debugging while performing testing. Never enable debugging on a production
@@ -247,6 +258,10 @@ netbox_login_required: False
 # before being prompted to re-authenticate. (Default: 1209600 [14 days])
 netbox_login_timeout: None
 
+# The view name or URL to which users are redirected after logging out.
+# Introducted in v3.3.10
+# netbox_logout_redirect_url: home
+
 # Setting this to True will display a "maintenance mode" banner at the top of every page.
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_maintenance_mode: False
@@ -314,6 +329,14 @@ netbox_plugins: []
 # IPv4 by default. Set this to True to prefer IPv4 instead.
 # Note: Moved to Dynamic Configuration (see netbox_override_dynamic_config)
 netbox_prefer_ipv4: False
+
+# Allows changing which queues are used internally for background tasks.
+# If no queue is defined the queue named `default` will be used.
+# Netbox >= 3.4.0
+netbox_queue_mappings:
+  webhook: low
+  report: high
+  script: high
 
 # Rack elevation size defaults, in pixels. For best results, the ratio of width
 # to height should be roughly 10:1.

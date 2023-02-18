@@ -32,6 +32,9 @@ REDIS = {
         # Set this to True to skip TLS certificate verification
         # This can expose the connection to attacks, be careful
         'INSECURE_SKIP_TLS_VERIFY': {{ netbox_redis_tls_insecure }},
+        {%- if netbox_redis_ca_cert_path is defined +%}
+        'CA_CERT_PATH': {{ netbox_redis_ca_cert_path }},
+        {%- endif +%}
     },
     'caching': {
         'HOST': '{{ netbox_redis_host }}',
@@ -45,6 +48,9 @@ REDIS = {
         # Set this to True to skip TLS certificate verification
         # This can expose the connection to attacks, be careful
         'INSECURE_SKIP_TLS_VERIFY': {{ netbox_redis_tls_insecure }},
+        {%- if netbox_redis_ca_cert_path is defined +%}
+        'CA_CERT_PATH': {{ netbox_redis_ca_cert_path }},
+        {%- endif +%}
     }
 }
 
@@ -61,6 +67,10 @@ SECRET_KEY = '{{ netbox_secret_key }}'
 ADMINS = {{ netbox_admins|to_json }}
 {% else %}
 ADMINS = []
+{% endif %}
+
+{% if netbox_allow_token_retrieval is defined %}
+ALLOW_TOKEN_RETRIEVAL = {{ netbox_allow_token_retrieval }}
 {% endif %}
 
 {% if netbox_auth_password_validators is defined %}
@@ -121,6 +131,10 @@ CUSTOM_VALIDATORS = {
 
 DEBUG = {{ netbox_debug }}
 
+{% if netbox_default_language is defined %}
+DEFAULT_LANGUAGE = '{{ netbox_default_language }}'
+{% endif %}
+
 {% if netbox_default_user_preferences is defined %}
 DEFAULT_USER_PREFERENCES = {{ netbox_default_user_preferences|to_json }}
 {% endif %}
@@ -176,6 +190,10 @@ LOGIN_REQUIRED = {{ netbox_login_required }}
 
 LOGIN_TIMEOUT = {{ netbox_login_timeout }}
 
+{% if netbox_logout_redirect_url is defined %}
+LOGOUT_REDIRECT_URL = '{{ netbox_logout_redirect_url }}'
+{% endif %}
+
 {% if netbox_override_dynamic_config %}
 MAINTENANCE_MODE = {{ netbox_maintenance_mode }}
 {% endif %}
@@ -228,6 +246,10 @@ PLUGINS_CONFIG = json.loads('{{ plugins_config | to_json }}')
 
 {% if netbox_override_dynamic_config %}
 PREFER_IPV4 = {{ netbox_prefer_ipv4 }}
+{% endif %}
+
+{% if netbox_queue_mappings is defined %}
+QUEUE_MAPPINGS = {{ netbox_queue_mappings | to_json }}
 {% endif %}
 
 {% if netbox_override_dynamic_config %}

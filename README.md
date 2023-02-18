@@ -1,7 +1,7 @@
 # Ansible Role: Netbox
 
 [![Netbox](
-https://img.shields.io/badge/Netbox-v3.3.7-blue)](https://github.com/netbox-community/netbox)
+https://img.shields.io/badge/Netbox-v3.4.4-blue)](https://github.com/netbox-community/netbox)
 [![CI](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml)
 [![Netbox](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml/badge.svg)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jvoss.netbox-blue.svg)](https://galaxy.ansible.com/jvoss/netbox)
@@ -12,17 +12,19 @@ Installs, configures and maintains [NetBox](https://github.com/netbox-community/
 on a variety of popular Linux distributions.
 
 ## Contents
-1. [General Information](#general-information)
-    1. [Supported Platforms](#supported-platforms) 
-2. [Role variables](#role-variables)
-3. [User accounts](#user-accounts)
-    1. [External Authentication](#external-authentication)
-4. [Plugins](#plugins)
-    1. [Removing Plugins](#removing-plugins)
-5. [Version Locking](#version-locking)
-6. [Dependencies](#dependencies)
-7. [Example Playbook](#example-playbook)
-8. [Contributing](#contributing)
+- [Ansible Role: Netbox](#ansible-role-netbox)
+  - [Contents](#contents)
+  - [General Information](#general-information)
+    - [Supported Platforms](#supported-platforms)
+  - [Role variables](#role-variables)
+  - [User accounts](#user-accounts)
+    - [External Authentication](#external-authentication)
+  - [Plugins](#plugins)
+    - [Removing Plugins](#removing-plugins)
+  - [Version locking](#version-locking)
+  - [Dependencies](#dependencies)
+  - [Example Playbook](#example-playbook)
+  - [Contributing](#contributing)
 
 ## General Information
 
