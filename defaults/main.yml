@@ -371,6 +371,13 @@ netbox_rq_default_timeout: 300
 # Note that the default value of this setting is derived from the installed location.
 # netbox_scripts_root: = '/opt/netbox/netbox/scripts'
 
+# The maximum size (in bytes) that an upload will be before it gets streamed to the file system.
+# Useful to be able to upload files bigger than 2.5Mbyte to custom scripts for processing.
+# netbox_file_upload_max_memory_size: 2621440
+
+# The name to use for the csrf token cookie.
+# netbox_csrf_cookie_name: 'csrftoken'
+
 # The name to use for the session cookie.
 netbox_session_cookie_name: 'sessionid'
 
