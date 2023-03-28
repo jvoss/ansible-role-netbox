@@ -347,7 +347,8 @@ netbox_rack_elevation_default_unit_width: 220
 # Remote authentication support
 netbox_remote_auth:
   enabled: False
-  backend: 'netbox.authentication.RemoteUserBackend'
+  # list of backends [first listed < v3.4.7, attempted in the order given >= v3.4.7)]
+  backend: ['netbox.authentication.RemoteUserBackend']
   header: 'HTTP_REMOTE_USER'
   auto_create_user: True
   default_groups: []

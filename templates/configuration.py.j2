@@ -259,7 +259,11 @@ RACK_ELEVATION_DEFAULT_UNIT_WIDTH = {{ netbox_rack_elevation_default_unit_width 
 
 # Remote authentication support
 REMOTE_AUTH_ENABLED = {{ netbox_remote_auth.enabled }}
+{%- if netbox_version_tag < 3.4.7  +%}
 REMOTE_AUTH_BACKEND = '{{ netbox_remote_auth.backend }}'
+{%- else +%}
+REMOTE_AUTH_BACKEND = {{ netbox_remote_auth.backend | to_json }}
+{%- endif +%}
 {% if netbox_remote_auth.header is defined %}
 REMOTE_AUTH_HEADER = '{{ netbox_remote_auth.header }}'
 {% endif %}
