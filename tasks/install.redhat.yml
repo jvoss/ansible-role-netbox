@@ -10,7 +10,7 @@
   loop:
     - acl
     - cronie
-    - python3-Django
+    - python3-django
   when:
     - ansible_distribution == 'Fedora'
 
