@@ -306,6 +306,14 @@ RQ_DEFAULT_TIMEOUT = {{ netbox_rq_default_timeout }}
 SCRIPTS_ROOT = {{ netbox_scripts_root }}
 {% endif %}
 
+{% if netbox_file_upload_max_memory_size is defined %}
+FILE_UPLOAD_MAX_MEMORY_SIZE = {{ netbox_file_upload_max_memory_size }}
+{% endif %}
+
+{% if netbox_csrf_cookie_name is defined %}
+CSRF_COOKIE_NAME = '{{ netbox_csrf_cookie_name }}'
+{% endif %}
+
 SESSION_COOKIE_NAME = '{{ netbox_session_cookie_name }}'
 
 {% if netbox_session_file_path == 'None' %}
