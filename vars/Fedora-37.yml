@@ -1,5 +1,5 @@
 ---
-__python_version: "3.11"
+__python_version: "3.10"
 __python_packages:
     - "python{{ python_version | default(__python_version) | replace('.', '') }}"
     - "python3-devel"
