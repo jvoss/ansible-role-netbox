@@ -1,24 +1,15 @@
 ---
 # Variable configuration.
-- name: Include OS-specific variables (Debian).
-  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when: ansible_os_family == 'Debian'
-
-- name: Include OS-specific variables (RedHat).
-  ansible.builtin.include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when:
-  - ansible_os_family == 'RedHat'
-  - ansible_distribution != 'Fedora'
-  - ansible_distribution != 'Amazon'
-
-- name: Include OS-specific variables (Fedora).
-  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when:
-  - ansible_distribution == 'Fedora'
-
-- name: Include OS-specific variables (Amazon).
-  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-  when: ansible_distribution == 'Amazon'
+- name: Include OS-specific variables.
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', first_found_params) }}"
+  vars:
+    first_found_params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+      paths:
+        - 'vars'
 
 - name: Define python_packages.
   ansible.builtin.set_fact:
