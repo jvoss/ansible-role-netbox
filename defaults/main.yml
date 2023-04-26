@@ -181,6 +181,11 @@ netbox_cors_origin_regex_whitelist: [
   # "r'^https?://)?(\w+\.)?example\.com$'"
 ]
 
+# Netbox >= 3.4.9
+# https://github.com/netbox-community/netbox/issues/11386
+# set django config element CSRF_COOKIE_SECURE
+# netbox_csrf_cookie_secure: True
+
 # Netbox >3.2
 # https://github.com/netbox-community/netbox/issues/8509
 netbox_csrf_trusted_origins: []
@@ -382,11 +387,21 @@ netbox_rq_default_timeout: 300
 # The name to use for the session cookie.
 netbox_session_cookie_name: 'sessionid'
 
+# Netbox >= 3.4.9
+# https://github.com/netbox-community/netbox/issues/11386
+# set django config element SESSION_COOKIE_SECURE
+# netbox_session_cookie_secure: True
+
 # By default, NetBox will store session data in the database. Alternatively, a file
 # path can be specified here to use local file storage instead. (This can be useful for
 # enabling authentication on a standby instance with read-only database access.) Note
 # that the user as which NetBox runs must have read and write permissions to this path.
 netbox_session_file_path: None
+
+# Netbox >= 3.4.9
+# https://github.com/netbox-community/netbox/issues/11386
+# set django config element SECURE_SSL_REDIRECT
+# netbox_secure_ssl_redirect: True
 
 # Time zone (default: UTC)
 netbox_time_zone: UTC
