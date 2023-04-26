@@ -46,6 +46,7 @@ Tested on the following platforms:
 * CentOS 8
 * Debian Buster (up to v3.1.11)
 * Debian Bullseye
+* Fedora Linux 37
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
 * Ubuntu 20.04
 * Ubuntu 22.04
