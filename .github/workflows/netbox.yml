@@ -26,11 +26,11 @@ jobs:
           - ubuntu2004
           - ubuntu2204
         netbox:
-          - v3.4.9
+          - v3.5.0
+          - v3.4.10
           - v3.3.10
           - v3.2.9
           - v3.1.11
-          - v3.0.12
         exclude:
           - distro: debian10
         include:

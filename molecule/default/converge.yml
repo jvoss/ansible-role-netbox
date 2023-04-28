@@ -11,7 +11,7 @@
       password: testing
       timeout: 30
       args: {}
-    netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqo"
+    netbox_secret_key: "lnvRn_5Bypl8hBV4mMwgsMuHxr6uZvGwJyDqB7fcKqolnvRn_5"
     netbox_superusers:
       - username: admin
         password: admin
