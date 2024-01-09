@@ -3,7 +3,7 @@
   ansible.builtin.lineinfile:
     path: "{{ netbox_current_path }}/local_requirements.txt"
     line: "{{ item.pip }}"
-    regexp: "^{{ item.pip }}"
+    regexp: '^{{ item.pip | regex_search("^[^\d\s<>=]+(?: [^\d\s<>=]+)*") }}'
     owner: "{{ netbox_user }}"
     mode: '0644'
     create: yes
