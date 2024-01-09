@@ -19,7 +19,6 @@ jobs:
         distro:
           # - amazonlinux2
           - centos8
-          - debian10
           - debian11
           - debian12
           - fedora37
@@ -33,13 +32,6 @@ jobs:
           - v3.3.10
           - v3.2.9
           - v3.1.11
-        exclude:
-          - distro: debian10
-        include:
-          - distro: debian10
-            netbox: v3.1.11
-          - distro: debian10
-            netbox: v3.0.12
 
     services:
       postgres:
