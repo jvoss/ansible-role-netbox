@@ -70,8 +70,6 @@
     owner: "{{ netbox_user }}"
     group: "{{ netbox_group }}"
     mode: '0664'
-  become: yes
-  become_user: "{{ netbox_user }}"
   notify: restart_netbox
 
 - name: configure | write ldap_config.py
@@ -81,8 +79,6 @@
     owner: "{{ netbox_user }}"
     group: "{{ netbox_group }}"
     mode: '0664'
-  become: yes
-  become_user: "{{ netbox_user }}"
   notify: restart_netbox
   when: netbox_auth_ldap is defined
 
@@ -93,8 +89,6 @@
     owner: "{{ netbox_user }}"
     group: "{{ netbox_group }}"
     mode: '0664'
-  become: yes
-  become_user: "{{ netbox_user }}"
   notify: restart_netbox
 
 - name: configure | configure the housekeeping task
