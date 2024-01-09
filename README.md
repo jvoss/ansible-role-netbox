@@ -1,7 +1,7 @@
 # Ansible Role: Netbox
 
 [![Netbox](
-https://img.shields.io/badge/Netbox-v3.5.0-blue)](https://github.com/netbox-community/netbox)
+https://img.shields.io/badge/Netbox-v3.7.0-blue)](https://github.com/netbox-community/netbox)
 [![CI](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml)
 [![Netbox](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml/badge.svg)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jvoss.netbox-blue.svg)](https://galaxy.ansible.com/jvoss/netbox)
@@ -44,7 +44,7 @@ compatability information.
 Tested on the following platforms:
 * Amazon Linux 2
 * CentOS 8
-* Debian Buster (up to v3.1.11)
+* Debian Bookworm
 * Debian Bullseye
 * Fedora Linux 37
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
@@ -54,7 +54,7 @@ Tested on the following platforms:
 This role will require root access (via sudo) to manage system dependencies and actions
 on behalf of netbox.
 
-Supports NetBox versions 3+
+Supports NetBox versions >=3.5.9
 
 ## Role variables
 

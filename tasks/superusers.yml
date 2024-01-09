@@ -11,8 +11,8 @@
   args:
     chdir: "{{ netbox_current_path }}/netbox"
     executable: /bin/bash
-  become: yes
-  become_method: sudo
+  become: true
+  become_method: ansible.builtin.sudo
   become_user: "{{ netbox_user }}"
   register: result
   loop: "{{ netbox_superusers }}"

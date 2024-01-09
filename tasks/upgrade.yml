@@ -4,7 +4,7 @@
   environment:
     PYTHON: "python{{ python_version | default(__python_version) }}"
   become: true
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   become_user: "{{ netbox_user }}"
   notify: restart_netbox
   # task vs handler to trigger at specific point in run
