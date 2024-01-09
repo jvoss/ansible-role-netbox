@@ -44,6 +44,7 @@ compatability information.
 Tested on the following platforms:
 * Amazon Linux 2
 * CentOS 8
+* Debian Bookworm
 * Debian Buster (up to v3.1.11)
 * Debian Bullseye
 * Fedora Linux 37
