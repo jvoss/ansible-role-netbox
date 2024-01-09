@@ -54,7 +54,7 @@ Tested on the following platforms:
 This role will require root access (via sudo) to manage system dependencies and actions
 on behalf of netbox.
 
-Supports NetBox versions 3+
+Supports NetBox versions >=3.5.9
 
 ## Role variables
 
