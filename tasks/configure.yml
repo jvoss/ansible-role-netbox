@@ -55,8 +55,21 @@
     owner: "{{ netbox_user }}"
     mode: '0644'
     create: yes
-  register: netbox_local_requirements
+  register: netbox_ldap_requirements
   when: netbox_auth_ldap is defined
+
+- name: configure | add social_core to local_requirements.txt
+  ansible.builtin.lineinfile:
+    path: "{{ netbox_current_path }}/local_requirements.txt"
+    line: "social-auth-core"
+    regexp: "^social-auth-core"
+    owner: "{{ netbox_user }}"
+    mode: '0644'
+    create: yes
+  register: netbox_remote_auth_requirements
+  when:
+    - netbox_remote_auth is defined
+    - netbox_remote_auth.enabled | default(false)
 
 - name: configure | set netbox_override_dynamic_config True for Netbox < 3.1.0
   ansible.builtin.set_fact:

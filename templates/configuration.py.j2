@@ -286,7 +286,15 @@ SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = '{{ netbox_remote_auth.azuread_oauth2.secret
 {% endif %}
 {% endif %}
 
-{% if netbox_remote_auth.social_auth_redirect_is_https is defined %}
+{% if netbox_remote_auth.github_organization_oauth2 is defined %}
+{% if 'social_core.backends.github.GithubOrganizationOAuth2' in netbox_remote_auth.backend | default([]) %}
+SOCIAL_AUTH_GITHUB_ORG_KEY = '{{ netbox_remote_auth.github_organization_oauth2.key }}'
+SOCIAL_AUTH_GITHUB_ORG_SECRET = '{{ netbox_remote_auth.github_organization_oauth2.secret }}'
+SOCIAL_AUTH_GITHUB_ORG_NAME = '{{ netbox_remote_auth.github_organization_oauth2.org_name }}'
+{% endif %}
+{% endif %}
+
+{% if netbox_remote_auth.social_auth_redirect_is_https | default(false) %}
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = {{ netbox_remote_auth.social_auth_redirect_is_https }}
 {% endif %}
 

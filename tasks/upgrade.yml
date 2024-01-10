@@ -8,4 +8,4 @@
   become_user: "{{ netbox_user }}"
   notify: restart_netbox
   # task vs handler to trigger at specific point in run
-  when: netbox_current_symlink.changed or netbox_local_requirements.changed or netbox_napalm_step.changed # noqa no-handler
+  when: netbox_current_symlink.changed or netbox_ldap_requirements.changed or netbox_remote_auth_requirements.changed or netbox_napalm_step.changed # noqa no-handler
