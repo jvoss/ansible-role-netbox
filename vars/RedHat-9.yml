@@ -1,0 +1,6 @@
+---
+__python_version: "3.11"
+__python_packages:
+    - "python{{ python_version | default(__python_version) }}"
+    - "python{{ python_version | default(__python_version) }}-pip"
+    - "python{{ python_version | default(__python_version) }}-devel"

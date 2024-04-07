@@ -23,10 +23,11 @@ jobs:
           - debian12
           - fedora37
           - rockylinux8
+          - rockylinux9
           - ubuntu2004
           - ubuntu2204
         netbox:
-          - v3.7.0
+          - v3.7.5
           - v3.6.9
           - v3.5.9
 
