@@ -1,7 +1,7 @@
 # Ansible Role: Netbox
 
 [![Netbox](
-https://img.shields.io/badge/Netbox-v3.7.0-blue)](https://github.com/netbox-community/netbox)
+https://img.shields.io/badge/Netbox-v3.7.5-blue)](https://github.com/netbox-community/netbox)
 [![CI](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/ci.yml)
 [![Netbox](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml/badge.svg)](https://github.com/jvoss/ansible-role-netbox/actions/workflows/netbox.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-jvoss.netbox-blue.svg)](https://galaxy.ansible.com/jvoss/netbox)
@@ -48,6 +48,7 @@ Tested on the following platforms:
 * Debian Bullseye
 * Fedora Linux 37
 * Rocky Linux 8 / Red Hat Enterprise Linux (RHEL) 8.2+
+* Rocky Linux 9 / Red Hat Enterprise Linux (RHEL) 9.3+
 * Ubuntu 20.04
 * Ubuntu 22.04
 

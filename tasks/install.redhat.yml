@@ -14,6 +14,15 @@
   when:
     - ansible_distribution == 'Fedora'
 
+- name: install.redhat | install packages missing on RHEL9
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - cronie
+  when:
+    - ansible_distribution_major_version == '9'
+
 - name: install.redhat | install required system packages
   ansible.builtin.yum:
     name: "{{ item }}"
