@@ -26,7 +26,7 @@
         db_locale: C.UTF-8
       when:
         - ansible_os_family == 'RedHat'
-        - ansible_distribution_major_version == '8'
+        - ansible_distribution_major_version >= '8'
         - lookup('env', 'CI') != 'true'
 
     - name: Install crontabs
